@@ -1,0 +1,16 @@
+syntax = "proto3";
+package job;
+
+message CreateJobReq {
+    string name = 1;
+    string descriptioon = 2;
+    string category = 3;
+}
+message CreateJobRes {
+    bool status = 1;
+    string id = 2;
+}
+
+service Job {
+    rpc CreateJob(CreateJobReq) returns (CreateJobRes) {}
+}

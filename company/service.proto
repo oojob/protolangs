@@ -1,0 +1,15 @@
+syntax = "proto3";
+package company;
+
+message CreateCompanyReq {
+    string name = 1;
+    string descriptioon = 2;
+}
+message CreateCompanyRes {
+    bool status = 1;
+    string id = 2;
+}
+
+service Company {
+    rpc CreateCompany(CreateCompanyReq) returns (CreateCompanyRes) {}
+}
