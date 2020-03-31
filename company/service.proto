@@ -1,15 +1,31 @@
+/**
+ * Company entity related messages.
+ *
+ * This file is resposible for all operation related to company entity.
+ */
 syntax = "proto3";
 package company;
 
+/**
+ * CreateComapny service request object
+*/
 message CreateCompanyReq {
-    string name = 1;
-    string descriptioon = 2;
-}
-message CreateCompanyRes {
-    bool status = 1;
-    string id = 2;
+    string name = 1; /// Unique company name
+    string descriptioon = 2; /// Coompany description
 }
 
+/**
+ * CreateComapny service response object
+*/
+message CreateCompanyRes {
+    bool status = 1; /// Company creation operation respone status
+    string id = 2; /// Company unique ID
+}
+
+/**
+ * Service defination for company entity
+*/
 service Company {
+    /// Used to create an company entity
     rpc CreateCompany(CreateCompanyReq) returns (CreateCompanyRes) {}
 }

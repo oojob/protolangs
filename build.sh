@@ -46,7 +46,7 @@ function buildProtoForTypes {
       # echo $reponame
       rm -rf $REPOPATH/$lang/$reponame
 
-      echo "Cloning repo: git@github.com:nirajgeorgian/$reponame.git"
+      echo "Cloning repo: git@github.com:oojob/$reponame.git"
 
       # Clone the repository down and set the branch to the automated one
       git clone git@github.com:oojob/$reponame.git $REPOPATH/$lang/$reponame
