@@ -6,26 +6,43 @@
 syntax = "proto3";
 package company;
 
-/**
- * CreateComapny service request object
-*/
-message CreateCompanyReq {
-    string name = 1; /// Unique company name
-    string descriptioon = 2; /// Coompany description
+import "google/protobuf/timestamp.proto";
+
+message Range {
+    int64 min = 1;
+    int64 max = 2;
+}
+message Company {
+    string id = 1;
+    string name = 2;
+    string created_by = 3;
+    string url = 4;
+	string logo = 5;
+    string location = 6;
+    string founded_year = 7;
+    Range no_of_employees = 8; 
+    string description = 10;
+    bool last_active = 11;
+    bool hiring_status = 12;
+    repeated string skills = 13;
+
+    google.protobuf.Timestamp created_at = 14;
+	google.protobuf.Timestamp updated_at = 15;
 }
 
-/**
- * CreateComapny service response object
-*/
-message CreateCompanyRes {
-    bool status = 1; /// Company creation operation respone status
-    string id = 2; /// Company unique ID
+message Empty {}
+message Id {
+    string id = 1;
+}
+message ReadCompaniesRes {
+    repeated Company companies = 1;
+    bool status = 2;
 }
 
-/**
- * Service defination for company entity
-*/
-service Company {
-    /// Used to create an company entity
-    rpc CreateCompany(CreateCompanyReq) returns (CreateCompanyRes) {}
+service CompanyService {
+    rpc CreateCompany(Company) returns (Id) {}
+    rpc ReadCompanies(Empty) returns (ReadCompaniesRes) {}
+    rpc ReadCompany(Id) returns (Company) {}
+    rpc UpdateCompany (Company) returns (Id) {}
+    rpc DeleteCompany (Id) returns (Id) {}
 }
