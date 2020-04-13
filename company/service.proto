@@ -12,6 +12,10 @@ message Range {
     int64 min = 1;
     int64 max = 2;
 }
+message Pagination {
+    string skip = 1;
+    int64 limit = 2;
+}
 message Company {
     string id = 1;
     string name = 2;
@@ -34,10 +38,14 @@ message Empty {}
 message Id {
     string id = 1;
 }
+message CompanyAllResponse{
+    repeated Company companies = 1;
+}
 
 service CompanyService {
     rpc CreateCompany(Company) returns (Id) {}
     rpc ReadCompanies(Empty) returns (stream Company) {}
+    rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse) {}
     rpc ReadCompany(Id) returns (Company) {}
     rpc UpdateCompany(Company) returns (Id) {}
     rpc DeleteCompany(Id) returns (Id) {}
