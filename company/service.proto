@@ -22,7 +22,7 @@ message Company {
     string founded_year = 7;
     Range no_of_employees = 8; 
     string description = 10;
-    bool last_active = 11;
+    google.protobuf.Timestamp last_active = 11;
     bool hiring_status = 12;
     repeated string skills = 13;
 
@@ -34,15 +34,11 @@ message Empty {}
 message Id {
     string id = 1;
 }
-message ReadCompaniesRes {
-    repeated Company companies = 1;
-    bool status = 2;
-}
 
 service CompanyService {
     rpc CreateCompany(Company) returns (Id) {}
-    rpc ReadCompanies(Empty) returns (ReadCompaniesRes) {}
+    rpc ReadCompanies(Empty) returns (stream Company) {}
     rpc ReadCompany(Id) returns (Company) {}
-    rpc UpdateCompany (Company) returns (Id) {}
-    rpc DeleteCompany (Id) returns (Id) {}
+    rpc UpdateCompany(Company) returns (Id) {}
+    rpc DeleteCompany(Id) returns (Id) {}
 }
