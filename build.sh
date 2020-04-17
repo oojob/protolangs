@@ -60,7 +60,13 @@ function buildProtoForTypes {
       cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
       rm -rf gen
 
-      commitAndPush $REPOPATH/$lang/$reponame
+      if [ $lang == "node" ]
+      then
+        commitAndPushNpmPackage $REPOPATH/$lang/$reponame
+      else
+        commitAndPush $REPOPATH/$lang/$reponame
+      fi
+
     done < .protolangs
   fi
 }
@@ -93,6 +99,24 @@ function commitAndPush {
     git add .
     git commit -m "Auto Creation of Proto"
     git push origin HEAD
+  else
+    echo "No changes detected for $1"
+  fi
+
+  leaveDir
+}
+
+function commitAndPushNpmPackage {
+  enterDir $1
+
+  git add -N .
+
+  if ! git diff --exit-code > /dev/null; then
+    git add .
+    git commit -m "Auto Creation of Proto"
+    npm install
+    npm run release
+    git push --follow-tags origin master && npm publish
   else
     echo "No changes detected for $1"
   fi

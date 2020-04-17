@@ -11,6 +11,21 @@ message CreateJobRes {
     string id = 2;
 }
 
+// health report
+message HealthCheckRequest {
+  string service = 1;
+}
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+  }
+  ServingStatus status = 1;
+}
+
 service Job {
-    rpc CreateJob(CreateJobReq) returns (CreateJobRes) {}
+    rpc CreateJob(CreateJobReq) returns (CreateJobRes);
+    rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+    rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse);
 }

@@ -42,11 +42,25 @@ message CompanyAllResponse{
     repeated Company companies = 1;
 }
 
+// health report
+message HealthCheckRequest {
+  string service = 1;
+}
+message HealthCheckResponse {
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+  }
+  ServingStatus status = 1;
+}
+
 service CompanyService {
-    rpc CreateCompany(Company) returns (Id) {}
-    rpc ReadCompanies(Empty) returns (stream Company) {}
-    rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse) {}
-    rpc ReadCompany(Id) returns (Company) {}
-    rpc UpdateCompany(Company) returns (Id) {}
-    rpc DeleteCompany(Id) returns (Id) {}
+    rpc CreateCompany(Company) returns (Id);
+    rpc ReadCompanies(Pagination) returns (CompanyAllResponse);
+    rpc ReadCompany(Id) returns (Company);
+    rpc UpdateCompany(Company) returns (Id);
+    rpc DeleteCompany(Id) returns (Id);
+    rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
+    rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse);
 }
