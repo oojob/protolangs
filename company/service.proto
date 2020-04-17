@@ -56,12 +56,12 @@ message HealthCheckResponse {
 }
 
 service CompanyService {
-    rpc CreateCompany(Company) returns (Id);
-    rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse);
-    rpc ReadCompanies(Empty) returns (stream Company);
-    rpc ReadCompany(Id) returns (Company);
-    rpc UpdateCompany(Company) returns (Id);
-    rpc DeleteCompany(Id) returns (Id);
-    rpc Check(HealthCheckRequest) returns (HealthCheckResponse);
-    rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse);
+    rpc CreateCompany(Company) returns (Id) {}
+    rpc ReadCompanies(Empty) returns (stream Company) {}
+    rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse) {}
+    rpc ReadCompany(Id) returns (Company) {}
+    rpc UpdateCompany(Company) returns (Id) {}
+    rpc DeleteCompany(Id) returns (Id) {}
+    rpc Check(HealthCheckRequest) returns (HealthCheckResponse) {}
+    rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse) {}
 }
