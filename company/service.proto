@@ -57,7 +57,8 @@ message HealthCheckResponse {
 
 service CompanyService {
     rpc CreateCompany(Company) returns (Id);
-    rpc ReadCompanies(Pagination) returns (CompanyAllResponse);
+    rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse);
+    rpc ReadCompanies(Empty) returns (stream Company);
     rpc ReadCompany(Id) returns (Company);
     rpc UpdateCompany(Company) returns (Id);
     rpc DeleteCompany(Id) returns (Id);
