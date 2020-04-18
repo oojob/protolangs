@@ -128,8 +128,10 @@ function commitAndPushNpmPackage {
 # compile process for each one
 function buildAll {
   echo "Buidling service's protocol buffers"
+  
   mkdir -p $REPOPATH
   mkdir -p $REPOPATH/{node,go}
+
   for d in */; do
     buildDir $d
   done
