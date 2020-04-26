@@ -1,0 +1,46 @@
+/**
+ * Profile entity related messages.
+ *
+ * This file is resposible for all operation related to profile entity.
+ */
+syntax = "proto3";
+package profile;
+
+import "google/protobuf/timestamp.proto";
+
+message Education {
+  string education = 1;
+  bool show = 2;
+}
+message Address {
+  string country = 1;
+  string locality = 2;
+  string region = 3;
+  string postal_code = 4;
+  string street = 5;
+}
+message Email {
+  string email = 1;
+  bool confirmed = 2;
+  bool show = 3;
+}
+
+message Profile {
+  string id = 1;
+  string profile_type = 2;
+  string type_token = 3;
+  string given_name = 4;
+  string middle_name = 5;
+  string family_name = 6;
+  Email email = 8;
+  string gender = 8;
+  google.protobuf.Timestamp birthdate = 19;
+  string headline = 7;
+  string description = 10;
+  string current_position = 8;
+  Education education = 9;
+  Address address = 10;
+
+  google.protobuf.Timestamp created_at = 14;
+	google.protobuf.Timestamp updated_at = 15;
+}

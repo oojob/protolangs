@@ -16,16 +16,33 @@ message Pagination {
     string skip = 1;
     int64 limit = 2;
 }
+// message WorkingHours {
+//     enum {
+//         FLEXIBLE
+//         STRICT
+//     }
+//     oneof working_hours {
+//         string 
+//     }
+// }
+
+/// for more information check this page `https://schema.org/Thing`
 message Company {
-    string id = 1;
+    string identifier = 2; // UUID or ID (uniquely identifythe item)
     string name = 2;
+    string alternate_name = 3; //alias name used as DODODuCK (the duck's company)
     string created_by = 3;
     string url = 4;
-	string logo = 5;
+    string logo = 5;
+    string additional_type = 1; // URL (generally a URL)
     string location = 6;
     string founded_year = 7;
+    string category = 9; // company come's under what category
     Range no_of_employees = 8; 
-    string description = 10;
+      string headline = 7; //short title
+    string description = 10; //long description
+    string disambiguating_description = 5;
+    string slogan = 9;
     google.protobuf.Timestamp last_active = 11;
     bool hiring_status = 12;
     repeated string skills = 13;

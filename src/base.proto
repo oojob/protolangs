@@ -1,0 +1,78 @@
+/**
+ * Base entity related messages.
+ *
+ * This file is resposible for storing all the base protobuff `message`.
+ */
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+message GeoLocation {
+  int64 elevation = 1;
+  int64 latitude = 2;
+  int64 longitude = 3;
+  int64 postal_code = 4;
+}
+message Address {
+  string country = 1;
+  string locality = 2;
+  string region = 3;
+  string postal_code = 4;
+  string street = 5;
+  GeoLocation geo = 6; 
+}
+
+message TimeSpecification {
+  google.protobuf.Timestamp opens = 1;
+  google.protobuf.Timestamp closes = 2;
+  
+  repeated string day_of_week = 3; // ["sun", "mon", ...]
+
+  google.protobuf.Timestamp valid_from = 4;
+  google.protobuf.Timestamp valid_through = 5;
+}
+message Rating {
+  string author = 1; // Person | Organization
+  int64 best_rating = 2;
+  string explanation = 3;
+  int64 value = 4;
+  int64 worst_rating = 5;
+}
+message AggregateRating {
+  string item_reviewed = 1;
+  int64 rating_count = 2;
+  int64 review_rount = 3;
+}
+
+message Thing {
+  string additional_type = 1; // URL (generally a URL)
+  
+  string alternate_name = 3;
+  string description = 4;
+  string disambiguating_description = 5;
+}
+
+
+
+message Place {
+  Address address = 1;
+  AggregateRating aggregateRating = 2;
+  string branch_code = 3; // `http://www.starbucks.co.uk/store-locator/etc/detail/3047` the code "3047"
+}
+message Review {
+  string item_reviewed = 1; // Company | Job | Profile
+  string aspect = 2;
+  string body = 3;
+  Rating rating = 4;
+}
+
+// Metadata it should be attached with higher level entity
+message Metadata {
+  string identifier = 2; // UUID or ID (uniquely identifythe item)
+
+  google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp updated_at = 2;
+  google.protobuf.Timestamp published_date = 3;
+  google.protobuf.Timestamp end_date = 4;
+
+}
