@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message UrlShortner {
+  string long_url = 1;
+  string short_url = 2;
+}
