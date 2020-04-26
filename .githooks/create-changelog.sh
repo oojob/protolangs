@@ -1,15 +1,21 @@
-#!/usr/bin/env bash
-#
-# Created on Sun Apr 26 2020
-#
-# Base entity related messages.
-# This file is resposible for storing all the base protobuff `message`.
-#
-# @authors nirajgeorgian@oojob.io (Niraj Kishore)
-#
-# Copyright (c) 2020 - oojob
+#!/bin/sh
+# Copyright (c) 2013 Martin Seeler
+# SPDX-License-Identifier: MIT
+# url: https://github.com/MartinSeeler/auto-changelog-hook/blob/master/post-commit
+set -eu
 
-# create a changelog
+# destination of the final changelog file
+OUTPUT_FILE=CHANGELOG.md
 
-git log --pretty="- %s" > CHANGELOG.md
-exit 0
+# generate the changelog
+git --no-pager log --no-merges --format="### %s%d%n>%aD%n%n>Author: %aN (%aE)%n%n>Commiter: %cN (%cE)%n%n%b%n%N%n" > $OUTPUT_FILE
+
+# prevent recursion!
+# since a 'commit --amend' will trigger the post-commit script again
+# we have to check if the changelog file has changed or not
+res=$(git status --porcelain | grep -c $OUTPUT_FILE)
+if [ "$res" -gt 0 ]; then
+  git add $OUTPUT_FILE
+  git commit --amend
+  echo "Populated Changelog in $OUTPUT_FILE"
+fi
