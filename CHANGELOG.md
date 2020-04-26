@@ -1,0 +1,16 @@
+- added changelog docc
+- add readme and contributing file
+- added code review users
+- added format to add code
+- added basic repo folder structure
+- added readme
+- added build dir
+- added code for streaming
+- added stream support
+- added code changes for build for npm package
+- added read all companies
+- added code for
+- completed company package
+- added company definations
+- added comments for code generation
+- initial commit
