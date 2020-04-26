@@ -1,4 +1,14 @@
-### added changelog generation git hook script (HEAD -> master)
+### removed test config hook (HEAD -> master)
+>Sun, 26 Apr 2020 10:02:20 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added changelog generation git hook script
 >Sun, 26 Apr 2020 09:59:14 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
