@@ -12,7 +12,7 @@
 branch="$(git rev-parse --abbrev-ref HEAD)"
 
 # get computer name to append in Chime message
-username=nirajgeorgian12
+username=nirajgeorgian
 
 # a branch name where you want to prevent git push. In this case, it's "master"
 if [ "$branch" = "master" ]; then

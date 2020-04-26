@@ -1,3 +1,7 @@
+- test #3
+- added test hooks
+- formated readme
+- initialy created change log
 - added changelog docc
 - add readme and contributing file
 - added code review users

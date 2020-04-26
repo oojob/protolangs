@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
+#
+# Created on Sun Apr 26 2020
+#
 # This script is meant to build and compile every protocolbuffer for each
 # service declared in this repository (as defined by sub-directories).
 # It compiles using docker containers based on Namely's protoc image
 # seen here: https://github.com/namely/docker-protoc
+#
+# @authors nirajgeorgian@oojob.io (Niraj Kishore)
+#
+# Copyright (c) 2020 - oojob
 
 set -e
 
