@@ -14,6 +14,5 @@
 hookDir=$(dirname $0)
 
 # Specify the hooks you want to run during
-# the pre-commit process:
-"$hookDir/areYouSure.sh"
-# && "hookDir/add-your-own-scripts-here"
+# the post-commit process:
+"$hookDir/create-changelog.sh"

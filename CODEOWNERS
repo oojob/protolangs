@@ -12,3 +12,6 @@
 
 # protocol generation language specif file code review
 *.protolangs @nirajgeorgian
+
+# git hooks for custom devlopment
+.githooks/* @nirajgeorgian
