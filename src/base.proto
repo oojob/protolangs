@@ -97,10 +97,20 @@ message TimeSpecification {
  * (Person | Company | Job)
  */
 message Rating {
-  string author = 1; // Person | Organization
+  /// Rating author :- Id for Person | Organization
+  /// For Exam - UUIDod user
+  string author = 1;
+
+  /// Rating best rating :- best rating value as string
   int64 best_rating = 2;
+
+  /// Rating explanation :- explanation for the rating
   string explanation = 3;
+
+  /// Rating Value For exam - 4
   int64 value = 4;
+
+  /// Rating worst rating :- worst rating value as string
   int64 worst_rating = 5;
 }
 
@@ -109,8 +119,13 @@ message Rating {
  * (Person | Company | Job)
  */
 message AggregateRating {
+  /// AggregateRating :-
   string item_reviewed = 1;
+
+  /// AggregateRating :-
   int64 rating_count = 2;
+
+  /// AggregateRating :-
   int64 review_rount = 3;
 }
 
@@ -139,6 +154,7 @@ message Place {
   /// Place Address which includes name and all data
   Address address = 1;
 
+  /// Place review :- review for a place
   Review review = 2;
 
   /// Place aggregate rating based on entity
@@ -176,8 +192,15 @@ message Identifier {
 message Metadata {
   string identifier = 2; // UUID or ID (uniquely identifythe item)
 
+  /// Metadata created_at :- creation date
   google.protobuf.Timestamp created_at = 1;
+
+  /// Metadata updated_at :-updation date
   google.protobuf.Timestamp updated_at = 2;
+
+  /// Metadata published_date :- first published date
   google.protobuf.Timestamp published_date = 3;
+
+  /// Metadata end_date :- date from when it become invalid
   google.protobuf.Timestamp end_date = 4;
 }

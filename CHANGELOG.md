@@ -1,4 +1,14 @@
-### removed test config hook (HEAD -> master)
+### added base package for protobuf file generation (HEAD -> master)
+>Mon, 27 Apr 2020 06:47:30 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### removed test config hook (origin/master)
 >Sun, 26 Apr 2020 10:02:20 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -38,7 +48,7 @@
 
 
 
-### added test hooks (origin/master)
+### added test hooks
 >Sun, 26 Apr 2020 09:09:41 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
