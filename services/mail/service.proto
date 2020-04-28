@@ -1,0 +1,35 @@
+/*
+ * Created on Sun Apr 28 2020
+ *
+ * Mail entity related messages.
+ * This file is resposible for all operation related to mail entity.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+import "oojob/protobuf/health.proto";
+
+package mail;
+
+message MailReq {
+  string from = 1;
+  string to = 2;
+  string subject = 3;
+  string message = 4;
+  string template = 5;
+}
+
+message MailRes { bool status = 1; }
+
+service MailService {
+  rpc SendMail(MailReq) returns (MailRes);
+
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
+
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
+}

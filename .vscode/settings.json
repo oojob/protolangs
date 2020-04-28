@@ -4,5 +4,7 @@
     "options": [
       "--proto_path=src/*.proto"
     ]
-  }
+  },
+  "workbench.editor.openSideBySideDirection": "down",
+  "workbench.editor.titleScrollbarSizing": "large"
 }

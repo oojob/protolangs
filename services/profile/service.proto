@@ -1,0 +1,47 @@
+/**
+ * Profile entity related messages.
+ *
+ * This file is resposible for all operation related to profile entity.
+ */
+syntax = "proto3";
+
+import "oojob/protobuf/system.proto";
+import "oojob/protobuf/metadata.proto";
+import "oojob/protobuf/place.proto";
+import "oojob/protobuf/health.proto";
+import "google/protobuf/timestamp.proto";
+
+package profile;
+
+message Education {
+  string education = 1;
+  bool show = 2;
+}
+
+message Profile {
+  oojob.protobuf.Identifier identity = 1;
+  string profile_type = 2;
+  string type_token = 3;
+  string given_name = 4;
+  string middle_name = 5;
+  string family_name = 6;
+  oojob.protobuf.Email email = 7;
+  string gender = 8;
+  google.protobuf.Timestamp birthdate = 9;
+  string current_position = 10;
+  Education education = 11;
+  oojob.protobuf.Address address = 12;
+  oojob.protobuf.Metadata metadata = 13;
+}
+
+message ProfileResponse { bool status = 1; }
+
+service ProfileService {
+  rpc CreateProfile(Profile) returns (ProfileResponse);
+
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
+
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
+}

@@ -1,0 +1,63 @@
+/*
+ * Created on Sun Apr 27 2020
+ *
+ * Company entity related messages.
+ * This file is resposible for all operation related to company entity.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+import "oojob/protobuf/system.proto";
+import "oojob/protobuf/place.proto";
+import "oojob/protobuf/metadata.proto";
+import "oojob/protobuf/cursor.proto";
+import "oojob/protobuf/health.proto";
+
+package company;
+
+/*
+ * Comapny is used for storing companies data
+ */
+message Company {
+  oojob.protobuf.Identifier identity = 1;
+  string admin = 2;
+  string url = 3;
+  string logo = 4;
+  oojob.protobuf.Range employees = 5;
+  oojob.protobuf.Place place = 6;
+  string founded_year = 7;
+  bool hiring_status = 8;
+  repeated string skills = 9;
+  oojob.protobuf.Metadata metadata = 10;
+}
+
+/*
+ * CompanyAllResponse returns an array of companies
+ */
+message CompanyAllResponse { repeated Company companies = 1; }
+
+/*
+ * CompanyService service file for company entity
+ */
+service CompanyService {
+  rpc CreateCompany(Company) returns (oojob.protobuf.Id);
+
+  rpc ReadCompany(oojob.protobuf.Id) returns (Company);
+
+  rpc ReadCompanies(oojob.protobuf.Empty) returns (stream Company);
+
+  rpc ReadAllCompanies(oojob.protobuf.Pagination) returns (CompanyAllResponse);
+
+  rpc UpdateCompany(Company) returns (oojob.protobuf.Id);
+
+  rpc DeleteCompany(oojob.protobuf.Id) returns (oojob.protobuf.Id);
+
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
+
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
+}

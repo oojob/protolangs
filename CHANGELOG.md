@@ -1,4 +1,14 @@
-### added structure for base entity (HEAD -> master)
+### added protorepo structure for base setup (HEAD -> master)
+>Tue, 28 Apr 2020 20:03:23 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added structure for base entity (origin/master)
 >Tue, 28 Apr 2020 15:17:03 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added base package for protobuf file generation (origin/master)
+### added base package for protobuf file generation
 >Mon, 27 Apr 2020 06:47:30 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

@@ -1,0 +1,41 @@
+/**
+ * Created on Sun Apr 28 2020
+ *
+ * Base entity protobuf for health report.
+ * https://github.com/grpc/grpc/blob/master/doc/health-checking.md
+ * This file is resposible for storing all the base protobuff `message`.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+package oojob.protobuf;
+
+/**
+ * HealthCheckRequest official grpc health check request stub
+ * Health checks are used to probe whether the server is able to handle rpcs.
+ * The client-to-server health checking can happen from point to point or via
+ * some control system.
+ */
+message HealthCheckRequest {
+  /// HealthCheckRequest service : service name
+  string service = 1;
+}
+
+/**
+ * HealthCheckResponse official grpc health check response stub
+ */
+message HealthCheckResponse {
+  /// HealthCheckResponse available option's as response value
+  enum ServingStatus {
+    UNKNOWN = 0;
+    SERVING = 1;
+    NOT_SERVING = 2;
+  }
+
+  /// HealthCheckResponse choose any one vaue
+  /// (UNKNOWN, SERVING, NOT_SERVING)
+  ServingStatus status = 1;
+}

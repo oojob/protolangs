@@ -1,0 +1,46 @@
+/*
+ * Created on Sun Apr 28 2020
+ *
+ * Code entity related messages.
+ * This file is resposible for all operation related to code entity.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+import "oojob/protobuf/health.proto";
+
+package code;
+
+message CodeRequest {
+  string code = 1;
+  string contest_slug = 2;
+  string language = 3;
+  string playlist_slug = 4;
+}
+
+message CodeResponse {
+  string challenge_id = 1;
+  string challenge_slug = 2;
+  string code = 3;
+  string codechecker_hash = 4;
+  string company = 5;
+  string compile_message = 6;
+  bool compile_status = 7;
+  string contest_id = 8;
+  string kind = 9;
+  string language = 10;
+  string language_status = 11;
+}
+
+service CodeService {
+  rpc SubmitCode(CodeRequest) returns (CodeResponse);
+
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
+
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
+}
