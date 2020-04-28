@@ -1,0 +1,32 @@
+/**
+ * Created on Sun Apr 28 2020
+ *
+ * Base entity protobuf for place/rating/review associated with upper level
+ * models/schema's.
+ * This file is resposible for storing all the base protobuff `message`.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+package oojob;
+
+/**
+ * Review help's us to review any Thing
+ * (Person | Company | Job)
+ */
+message Review {
+  /// Review on Thing (Company | Job | Profile)
+  string item_reviewed = 1;
+
+  /// Review aspect is relevant to this part or facet of the itemReviewed.
+  string aspect = 2;
+
+  /// Review data
+  string body = 3;
+
+  /// Review rating
+  Rating rating = 4;
+}

@@ -19,11 +19,6 @@ message Address {
   string postal_code = 4;
   string street = 5;
 }
-message Email {
-  string email = 1;
-  bool confirmed = 2;
-  bool show = 3;
-}
 
 message Profile {
   string id = 1;
@@ -42,5 +37,5 @@ message Profile {
   Address address = 10;
 
   google.protobuf.Timestamp created_at = 14;
-	google.protobuf.Timestamp updated_at = 15;
+  google.protobuf.Timestamp updated_at = 15;
 }

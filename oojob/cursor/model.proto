@@ -1,0 +1,49 @@
+/**
+ * Created on Sun Apr 28 2020
+ *
+ * Base entity protobuf for cursor.
+ * This file is resposible for storing all the base protobuff `message`.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+package oojob;
+
+/**
+ * Pagination help's us to paginate large set of data through curser based
+ where
+ * what's going to come has to be put on next and what was previous should be
+ * mentioned on previous.
+ * cursors in pagination
+ * Cursors are pointers to the spot where we’ve left off in the data. More
+ * specifically, cursors are variables that can hold any value that the
+ client
+ * can pass to the server to help the it find the point at which it should
+ start
+ * returning data. It doesn’t matter what value you use, and in fact it
+ should
+ * be opaque from the point of view of the client.
+ * https://www.apollographql.com/blog/understanding-pagination-rest-graphql-and-relay-b10f835549e7
+ */
+message Pagination {
+  /// Pagination first :- first x value to take out of fetched result
+  int64 first = 1;
+
+  /// Pagination after :- after fetching skip the first x items
+  string after = 2;
+
+  /// Pagination offset :- standard offset in pagination
+  string offset = 3;
+
+  /// Pagination limit :- standard limit in pagination
+  int64 limit = 4;
+
+  /// Pagination previous :- previous curser for data
+  string previous = 5;
+
+  /// Pagination :- next curser for data
+  string next = 6;
+}

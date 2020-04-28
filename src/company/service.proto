@@ -1,84 +1,50 @@
 /**
- * Company entity related messages.
+ * Created on Sun Apr 27 2020
  *
+ * Company entity related messages.
  * This file is resposible for all operation related to company entity.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
  */
 syntax = "proto3";
+
+import "company/base.proto";
+
 package company;
 
-import "google/protobuf/timestamp.proto";
-
-message Range {
-    int64 min = 1;
-    int64 max = 2;
-}
-message Pagination {
-    string skip = 1;
-    int64 limit = 2;
-}
-// message WorkingHours {
-//     enum {
-//         FLEXIBLE
-//         STRICT
-//     }
-//     oneof working_hours {
-//         string 
-//     }
-// }
-
-/// for more information check this page `https://schema.org/Thing`
+/**
+ * Comapny is used for storing companies data
+ */
 message Company {
-    string identifier = 2; // UUID or ID (uniquely identifythe item)
-    string name = 2;
-    string alternate_name = 3; //alias name used as DODODuCK (the duck's company)
-    string created_by = 3;
-    string url = 4;
-    string logo = 5;
-    string additional_type = 1; // URL (generally a URL)
-    string location = 6;
-    string founded_year = 7;
-    string category = 9; // company come's under what category
-    Range no_of_employees = 8; 
-      string headline = 7; //short title
-    string description = 10; //long description
-    string disambiguating_description = 5;
-    string slogan = 9;
-    google.protobuf.Timestamp last_active = 11;
-    bool hiring_status = 12;
-    repeated string skills = 13;
-
-    google.protobuf.Timestamp created_at = 14;
-	google.protobuf.Timestamp updated_at = 15;
+  Identifier identity = 1;
+  string admin = 2;
+  string url = 3;
+  string logo = 4;
+  Range employees = 5;
+  Place place = 6;
+  string founded_year = 7;
+  bool hiring_status = 8;
+  repeated string skills = 9;
+  Metadata metadata = 10;
 }
 
-message Empty {}
-message Id {
-    string id = 1;
-}
-message CompanyAllResponse{
-    repeated Company companies = 1;
-}
+/**
+ * CompanyAllResponse returns an array of companies
+ */
+message CompanyAllResponse { repeated Company companies = 1; }
 
-// health report
-message HealthCheckRequest {
-  string service = 1;
-}
-message HealthCheckResponse {
-  enum ServingStatus {
-    UNKNOWN = 0;
-    SERVING = 1;
-    NOT_SERVING = 2;
-  }
-  ServingStatus status = 1;
-}
-
-service CompanyService {
-    rpc CreateCompany(Company) returns (Id) {}
-    rpc ReadCompanies(Empty) returns (stream Company) {}
-    rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse) {}
-    rpc ReadCompany(Id) returns (Company) {}
-    rpc UpdateCompany(Company) returns (Id) {}
-    rpc DeleteCompany(Id) returns (Id) {}
-    rpc Check(HealthCheckRequest) returns (HealthCheckResponse) {}
-    rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse) {}
-}
+/**
+ * CompanyService service file for company entity
+ */
+// service CompanyService {
+//   rpc CreateCompany(Company) returns (Id) {}
+//   rpc ReadCompany(Id) returns (Company) {}
+//   rpc ReadCompanies(Empty) returns (stream Company) {}
+//   rpc ReadAllCompanies(Pagination) returns (CompanyAllResponse) {}
+//   rpc UpdateCompany(Company) returns (Id) {}
+//   rpc DeleteCompany(Id) returns (Id) {}
+//   rpc Check(HealthCheckRequest) returns (HealthCheckResponse) {}
+//   rpc Watch(HealthCheckRequest) returns (stream HealthCheckResponse) {}
+// }

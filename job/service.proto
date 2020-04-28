@@ -6,8 +6,6 @@
 syntax = "proto3";
 package base;
 
-import "base.proto";
-
 // import "base.proto";
 
 // message Job {

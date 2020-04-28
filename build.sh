@@ -13,7 +13,7 @@
 
 set -e
 
-REPOPATH=${REPOPATH-/Users/oooo/Desktop/my-job/protolangs/repos}
+REPOPATH=${REPOPATH-/Users/oooo/Desktop/my-job/protolangs/build}
 CURRENT_BRANCH=${CURRENT_BRANCH-"master"}
 
 # Helper for adding a directory to the stack and echoing the result
@@ -32,13 +32,19 @@ function leaveDir {
 # protobufs
 function buildDir {
   currentDir="$1"
-  echo "Building directory \"$currentDir\""
+  if [ -d $currentDir ];
+  then
+    echo "Building directory \"$currentDir\""
 
-  enterDir $currentDir
+    # # enter directory script
+    # enterDir $currentDir
 
-  buildProtoForTypes $currentDir
+    # build our execution/task
+    buildProtoForTypes $currentDir
 
-  leaveDir
+    # # leave the directory
+    # leaveDir
+  fi
 }
 
 # Iterates through all of the languages listed in the services .protolangs file
@@ -46,35 +52,38 @@ function buildDir {
 function buildProtoForTypes {
   target=${1%/}
 
-  if [ -f .protolangs ]; then
+  if [ -f $target/.protolangs ]; then
     while read lang; do
-      reponame="protorepo-$target-$lang"
+      # build the repo name
+      # space is set as delimiter
+      IFS='/' read -r directory <<< "$target"
 
-      # echo $reponame
+      reponame="protorepo-$directory-$lang"
       rm -rf $REPOPATH/$lang/$reponame
-
-      echo "Cloning repo: git@github.com:oojob/$reponame.git"
+      echo "removed $reponame for updating ..."
 
       # Clone the repository down and set the branch to the automated one
-      git clone git@github.com:oojob/$reponame.git $REPOPATH/$lang/$reponame
-      setupBranch $REPOPATH/$lang/$reponame
+      echo "Cloning repo: git@github.com:oojob/$reponame.git"
+      # git clone git@github.com:oojob/$reponame.git $REPOPATH/$lang/$reponame
+      # setupBranch $REPOPATH/$lang/$reponame
 
-      # # Use the docker container for the language we care about and compile
-      docker run -v `pwd`:/defs namely/protoc-all -f service.proto -l $lang --with-docs --lint $([ $lang == 'node' ] && echo "--with-typescript" || echo "--with-validator")
+      # cp base.proto $directory/
+      echo `pwd`
+      # Use the docker container for the language we care about and compile
+      docker run -v `pwd`:/defs namely/protoc-all -f $directory/service.proto -i $directory -l $lang --with-docs --lint $([ $lang == 'node' ] && echo "--with-typescript" || echo "--with-validator")
 
-      # Copy the generated files out of the pb-* path into the repository
-      # that we care about
-      cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
-      rm -rf gen
+      # Copy the generated files out of the pb-* path into the repository that we care about
+      # cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
+      # rm -rf gen
 
-      if [ $lang == "node" ]
-      then
-        commitAndPushNpmPackage $REPOPATH/$lang/$reponame
-      else
-        commitAndPush $REPOPATH/$lang/$reponame
-      fi
+      # if [ $lang == "node" ]
+      # then
+      #   commitAndPushNpmPackage $REPOPATH/$lang/$reponame
+      # else
+      #   commitAndPush $REPOPATH/$lang/$reponame
+      # fi
 
-    done < .protolangs
+    done < $target/.protolangs
   fi
 }
 
@@ -138,6 +147,7 @@ function buildAll {
   
   mkdir -p $REPOPATH
   mkdir -p $REPOPATH/{node,go}
+  cd src
 
   for d in */; do
     buildDir $d

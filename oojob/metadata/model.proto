@@ -1,0 +1,36 @@
+/**
+ * Created on Sun Apr 28 2020
+ *
+ * Base entity protobuf for metadata associated with upper level
+ * models/schema's.
+ * This file is resposible for storing all the base protobuff `message`.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package oojob;
+
+/**
+ * Metadata it should be attached with higher level entity
+ */
+message Metadata {
+  /// Metadata created_at :- creation date
+  google.protobuf.Timestamp created_at = 1;
+
+  /// Metadata updated_at :-updation date
+  google.protobuf.Timestamp updated_at = 2;
+
+  /// Metadata published_date :- first published date
+  google.protobuf.Timestamp published_date = 3;
+
+  /// Metadata end_date :- date from when it become invalid
+  google.protobuf.Timestamp end_date = 4;
+
+  /// Metadata last_active :- fate on which this entity was last active
+  google.protobuf.Timestamp last_active = 5;
+}

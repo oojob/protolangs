@@ -1,4 +1,14 @@
-### added base package for protobuf file generation (HEAD -> master)
+### added structure for base entity (HEAD -> master)
+>Tue, 28 Apr 2020 15:17:03 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added base package for protobuf file generation (origin/master)
 >Mon, 27 Apr 2020 06:47:30 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### removed test config hook (origin/master)
+### removed test config hook
 >Sun, 26 Apr 2020 10:02:20 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
