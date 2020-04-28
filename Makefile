@@ -10,5 +10,5 @@
 init:
 	@git config core.hooksPath .githooks
 
-build:
+buildProto:
 	./build.sh

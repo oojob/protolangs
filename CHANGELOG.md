@@ -1,4 +1,14 @@
-### added protorepo structure for base setup (HEAD -> master)
+### added makefile build option (HEAD -> master)
+>Tue, 28 Apr 2020 20:47:45 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added protorepo structure for base setup (origin/master)
 >Tue, 28 Apr 2020 20:03:23 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added structure for base entity (origin/master)
+### added structure for base entity
 >Tue, 28 Apr 2020 15:17:03 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
