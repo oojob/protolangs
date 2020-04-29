@@ -116,6 +116,12 @@ function buildProtoForTypes {
     fi
   done
 
+  nohup npx serve -d build/doc &
+  sleep 1
+  wget localhost:5000
+  mv index.html build/doc
+  killall -9 node
+
   commitAndPush build/doc
 }
 
