@@ -53,12 +53,18 @@ function buildProtoForTypes {
   # target=${1%/}
   # echo $target
 
+  rm -rf build/doc
+  git clone git@github.com:oojob/oojob.github.io build/doc
+
   docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l go --with-docs --lint --with-validator
   rm -rf build/go/protobuf
   # mkdir -p build/go/protobuf
   git clone git@github.com:oojob/protobuf.git build/go/protobuf
   cp -R gen/pb-go/* build/go/protobuf/
+  mkdir -p build/doc/protobuf
+  cp build/go/protobuf/doc/index.html build/doc/protobuf/
   rm -rf gen
+
   commitAndPush build/go/protobuf
 
   # BASE_PACKAGE=$target/oojob
@@ -94,6 +100,8 @@ function buildProtoForTypes {
           rm -rf gen/pb-$lang/services
           cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
           rm -rf gen
+          mkdir -p $REPOPATH/doc/$reponame
+          cp $REPOPATH/$lang/$reponame/doc/index.html $REPOPATH/doc/$reponame/
           commitAndPush $REPOPATH/$lang/$reponame
 
           # if [ $lang == "node" ]
@@ -107,6 +115,8 @@ function buildProtoForTypes {
       done
     fi
   done
+
+  commitAndPush build/doc
 }
 
 function setupBranch {
@@ -168,7 +178,7 @@ function buildAll {
   echo "Buidling service's protocol buffers"
   
   mkdir -p $REPOPATH
-  mkdir -p $REPOPATH/{node,go}
+  mkdir -p $REPOPATH/{node,go,doc}
 
   buildProtoForTypes
 }

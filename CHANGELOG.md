@@ -1,4 +1,14 @@
-### added base package as github (HEAD -> master)
+### added automatic doc publication option (HEAD -> master)
+>Wed, 29 Apr 2020 16:20:01 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added base package as github (origin/master)
 >Wed, 29 Apr 2020 12:57:57 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added makefile build option (origin/master)
+### added makefile build option
 >Tue, 28 Apr 2020 20:47:45 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
