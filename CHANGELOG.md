@@ -1,4 +1,14 @@
-### added build docs generation (HEAD -> master)
+### added code service protobuf (HEAD -> master)
+>Thu, 30 Apr 2020 01:13:46 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added build docs generation (origin/master)
 >Wed, 29 Apr 2020 17:45:34 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added automatic doc publication option (origin/master)
+### added automatic doc publication option
 >Wed, 29 Apr 2020 16:20:01 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

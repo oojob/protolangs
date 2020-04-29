@@ -15,6 +15,7 @@ import "github.com/oojob/protobuf/metadata.proto";
 import "github.com/oojob/protobuf/time.proto";
 import "github.com/oojob/protobuf/system.proto";
 import "github.com/oojob/protobuf/health.proto";
+import "github.com/oojob/protobuf/applicants.proto";
 
 package job;
 
@@ -27,8 +28,10 @@ message Job {
   repeated string skills = 6;
   string working_hours = 7;
   string status = 8; // opened / closed / block / expired
-  github.com.oojob.protobuf.Place place = 9;
-  github.com.oojob.protobuf.Metadata metadata = 10;
+  repeated string qualification = 9;
+  github.com.oojob.protobuf.Place place = 10;
+  github.com.oojob.protobuf.Metadata metadata = 11;
+  github.com.oojob.protobuf.Applicant applicants = 12;
 }
 
 message CreateJobReq {

@@ -59,6 +59,19 @@ message Email {
 }
 
 /**
+ * Attachment help's us to define what type of attchment and which file is
+ * responsible for it.
+ */
+message Attachment {
+  /// Attachment type :- it defines file type which help's frontend to render
+  /// appropiate view for example: type = PDF || type = JPEG
+  string type = 1;
+
+  /// Attachment file :- file upload for this attachment
+  string file = 2;
+}
+
+/**
  * Identifier help's us to represent an base entity
  * (Person | Company | Job)
  */

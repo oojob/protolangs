@@ -3,7 +3,10 @@
  *
  * Base entity protobuf for metadata associated with upper level
  * models/schema's.
- * This file is resposible for storing all the base protobuff `message`.
+ * This model is helper model which attach additional data related to time
+ * For example: when it was created, when it moved to draft, or when it moved
+ * to expired etc. This file is responsible for storing all the base protobuf
+ * `message`.
  *
  * @authors nirajgeorgian@oojob.io (Niraj Kishore)
  *
@@ -17,6 +20,8 @@ package github.com.oojob.protobuf;
 
 /**
  * Metadata it should be attached with higher level entity
+ * It will provide you with additional attachment of time based which will
+ * help you to analyze the life process of the entity it attached to.
  */
 message Metadata {
   /// Metadata created_at :- creation date

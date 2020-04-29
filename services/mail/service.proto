@@ -4,32 +4,160 @@
  * Mail entity related messages.
  * This file is resposible for all operation related to mail entity.
  *
- * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ * @author nirajgeorgian@oojob.io (Niraj Kishore)
+ * @author dibyarupajena@gmail.com (Dibyarupa Jena)
  *
  * Copyright (c) 2020 - oojob
  */
 syntax = "proto3";
 
 import "github.com/oojob/protobuf/health.proto";
+import "google/protobuf/struct.proto";
+import "github.com/oojob/protobuf/metadata.proto";
+import "github.com/oojob/protobuf/system.proto";
 
 package mail;
 
-message MailReq {
+/**
+ * Mail help's us to store one mail entity for future conversation refrence
+ */
+message Mail {
+  /// MailReq from :- from whose account the mail should be send.
+  /// default's to: admin@oojob.io
+  /// example values: abcapplied@gmail.com
   string from = 1;
+
+  /// MailReq to :- to whom the mail should be sent
+  /// For Eaxmple: dododuck@gmail.com
   string to = 2;
+
+  /// MailReq subject :- your mail subject
   string subject = 3;
+
+  /// MailReq message :- your mail body message
   string message = 4;
-  string template = 5;
+
+  /// all the attachment needed to send for ex: PDF or an image
+  repeated github.com.oojob.protobuf.Attachment attachments = 5;
+
+  /// your variable's used for message construction based on template creation
+  google.protobuf.Struct variable = 6;
+
+  /// MailReq template :- choose which template to attach with this mail
+  /// data let's suppose we have 5 type's of mail template 1: for applying
+  /// job 2: for company creation so this will take a value what type of
+  /// template we have to choose to send the data
+  /// default to oojob default template which is used to send default mail's
+  string template = 7;
+
+  /// It will provide you with addtional attachment of time based which which
+  /// will help you to analyze the life process of the entity it attached to
+  github.com.oojob.protobuf.Metadata metadata = 8;
 }
 
-message MailRes { bool status = 1; }
+/**
+ * MailBox help's us to store conversation between two email id's
+ */
+message MailBox {
+  /// MailBox Identifier :- help's us to represent an base entity
+  /// and identity uniquely
+  github.com.oojob.protobuf.Identifier identifier = 1;
 
+  /// MailBox context help's us to identify on what context
+  /// did we sent out the mail
+  /// [a, b] a and b are two contacts who shared conversation between them.
+  string context = 2;
+
+  ///  the conversation that happened between two people
+  repeated string owner = 3;
+
+  /// It will provide you with additional attachment of time based which
+  /// will help you to analyze the life process of the entity it attached to
+  github.com.oojob.protobuf.Metadata metadata = 8;
+}
+
+/**
+ * UserMailBox help's us to store all the conversations of one user
+ */
+message UserMailBox {
+  /// UserMailBox Identifier :- help's us to represent an base entity
+  /// and identity uniquely
+  github.com.oojob.protobuf.Identifier identifier = 1;
+
+  /// help's us to store and keep a refrence to all the mail trans.
+  /// <"dododduck", "i123disfjf">
+  /// this user had a conversation with dododuck whose mail trans are stored in
+  /// MailBox with id as i123disfjf
+  google.protobuf.Struct contacts = 2;
+
+  /// It will provide you with addtional attachment of time based which which
+  /// will help you to analyze the life process of the entity it attached to
+  github.com.oojob.protobuf.Metadata metadata = 8;
+}
+
+/**
+ * MailReq it help's us to define request object for mail sending task
+ */
+message SendMailReq {
+  /// MailReq from :- from whose account he mail should be send.
+  /// default's to: admin@oojob.io
+  /// example values: abcapplied@gmail.com
+  string from = 1;
+
+  /// MailReq to :- to whome the mail should be sent
+  /// For Eaxmple: dododuck@gmail.com
+  string to = 2;
+
+  /// MailReq subject :- your mail subject
+  string subject = 3;
+
+  /// MailReq message :- your mail body message
+  string message = 4;
+
+  /// all the attachment needed to send for ex: PDF or an image
+  repeated github.com.oojob.protobuf.Attachment attachments = 5;
+
+  /// your variable's used for message construction based on template creation
+  google.protobuf.Struct variable = 6;
+
+  /// MailReq template :- choose which template to attach with this mail
+  /// data let's suppose we have 5 type's of mail template 1: for applying
+  /// job 2: for company creation so this will take a value what type of
+  /// template we have to choose to send the data
+  /// default to oojob default template which is used to send default mail
+  string template = 7;
+}
+
+/**
+ * SendMailRes help's us to track whether the mail we requested sent
+ * successfully or not
+ */
+message SendMailRes {
+  /// SendMailRes bool :- help's us to identify for success status
+  bool status = 1;
+}
+
+/**
+ * MailService responsible for mail microservice operation.
+ * more info can be found at : https://github.com/oojob/service-mail
+ * project: github.com/oojob
+ * how does this mail service work as a full microservice
+ * 1: we need to create base mail templates and attach variable to it.
+ * 2: send mail based on template or directly based upon context
+ *  - sending as company recruiter
+ *  - sending as applicant
+ *  - sending as formal mail exchange text
+ * any other service need to send any mail's based on it's requirement
+ */
 service MailService {
+  /// Used to send mail to any based on any mail template
   rpc SendMail(MailReq) returns (MailRes);
 
+  /// Used to check health status of the running microservice
   rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
       returns (github.com.oojob.protobuf.HealthCheckResponse);
 
+  /// Used to check health status of the running microservice as stream
   rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
       returns (stream github.com.oojob.protobuf.HealthCheckResponse);
 }

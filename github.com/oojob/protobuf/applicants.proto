@@ -1,0 +1,30 @@
+/*
+ * Created on Sun Apr 29 2020
+ *
+ * Applicant entity related messages.
+ * This file is resposible for all operation related to job entity.
+ *
+ * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojob
+ */
+syntax = "proto3";
+
+package github.com.oojob.protobuf;
+
+/**
+ * Applicant for job | task
+ */
+message Applicant {
+  /// total applied applicant's
+  repeated string applications = 1;
+
+  /// shortlisted applicant
+  repeated string shortlisted = 2;
+
+  /// onhold status applicant
+  repeated string onhold = 3;
+
+  /// rejected applicant
+  repeated string rejected = 4;
+}
