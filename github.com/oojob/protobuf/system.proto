@@ -11,7 +11,7 @@
  */
 syntax = "proto3";
 
-package oojob.protobuf;
+package github.com.oojob.protobuf;
 
 /**
  * Range help's us to define min/max range value

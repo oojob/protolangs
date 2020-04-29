@@ -10,7 +10,7 @@
  */
 syntax = "proto3";
 
-import "oojob/protobuf/health.proto";
+import "github.com/oojob/protobuf/health.proto";
 
 package mail;
 
@@ -27,9 +27,9 @@ message MailRes { bool status = 1; }
 service MailService {
   rpc SendMail(MailReq) returns (MailRes);
 
-  rpc Check(oojob.protobuf.HealthCheckRequest)
-      returns (oojob.protobuf.HealthCheckResponse);
+  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (github.com.oojob.protobuf.HealthCheckResponse);
 
-  rpc Watch(oojob.protobuf.HealthCheckRequest)
-      returns (stream oojob.protobuf.HealthCheckResponse);
+  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
 }

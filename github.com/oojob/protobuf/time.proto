@@ -13,7 +13,7 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 
-package oojob.protobuf;
+package github.com.oojob.protobuf;
 
 // DaysOfWeek help's us to represent days on week in order
 enum DaysOfWeek {

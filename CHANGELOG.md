@@ -1,4 +1,14 @@
-### added makefile build option (HEAD -> master)
+### added base package as github (HEAD -> master)
+>Wed, 29 Apr 2020 12:57:57 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added makefile build option (origin/master)
 >Tue, 28 Apr 2020 20:47:45 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added protorepo structure for base setup (origin/master)
+### added protorepo structure for base setup
 >Tue, 28 Apr 2020 20:03:23 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

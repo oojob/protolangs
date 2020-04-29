@@ -10,7 +10,7 @@
  */
 syntax = "proto3";
 
-package oojob.protobuf;
+package github.com.oojob.protobuf;
 
 /**
  * Pagination help's us to paginate large set of data through curser based

@@ -10,25 +10,25 @@
  */
 syntax = "proto3";
 
-import "oojob/protobuf/place.proto";
-import "oojob/protobuf/metadata.proto";
-import "oojob/protobuf/time.proto";
-import "oojob/protobuf/system.proto";
-import "oojob/protobuf/health.proto";
+import "github.com/oojob/protobuf/place.proto";
+import "github.com/oojob/protobuf/metadata.proto";
+import "github.com/oojob/protobuf/time.proto";
+import "github.com/oojob/protobuf/system.proto";
+import "github.com/oojob/protobuf/health.proto";
 
 package job;
 
 message Job {
-  oojob.protobuf.Identifier identity = 1;
+  github.com.oojob.protobuf.Identifier identity = 1;
   string employment = 2; // fulltime/ parttime / remote
-  oojob.protobuf.Range salary = 3;
-  oojob.protobuf.Range experience = 4;
-  oojob.protobuf.Time time = 5;
+  github.com.oojob.protobuf.Range salary = 3;
+  github.com.oojob.protobuf.Range experience = 4;
+  github.com.oojob.protobuf.Time time = 5;
   repeated string skills = 6;
   string working_hours = 7;
   string status = 8; // opened / closed / block / expired
-  oojob.protobuf.Place place = 9;
-  oojob.protobuf.Metadata metadata = 10;
+  github.com.oojob.protobuf.Place place = 9;
+  github.com.oojob.protobuf.Metadata metadata = 10;
 }
 
 message CreateJobReq {
@@ -44,9 +44,9 @@ message CreateJobRes {
 service JobService {
   rpc CreateJob(CreateJobReq) returns (CreateJobRes);
 
-  rpc Check(oojob.protobuf.HealthCheckRequest)
-      returns (oojob.protobuf.HealthCheckResponse);
+  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (github.com.oojob.protobuf.HealthCheckResponse);
 
-  rpc Watch(oojob.protobuf.HealthCheckRequest)
-      returns (stream oojob.protobuf.HealthCheckResponse);
+  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
 }

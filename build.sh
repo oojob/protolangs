@@ -53,6 +53,14 @@ function buildProtoForTypes {
   # target=${1%/}
   # echo $target
 
+  docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l go --with-docs --lint --with-validator
+  rm -rf build/go/protobuf
+  # mkdir -p build/go/protobuf
+  git clone git@github.com:oojob/protobuf.git build/go/protobuf
+  cp -R gen/pb-go/* build/go/protobuf/
+  rm -rf gen
+  commitAndPush build/go/protobuf
+
   # BASE_PACKAGE=$target/oojob
   for src in */; do
     if [ $src == 'services/' ]; then
