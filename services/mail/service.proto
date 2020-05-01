@@ -151,7 +151,7 @@ message SendMailRes {
  */
 service MailService {
   /// Used to send mail to any based on any mail template
-  rpc SendMail(MailReq) returns (MailRes);
+  rpc SendMail(SendMailReq) returns (SendMailRes);
 
   /// Used to check health status of the running microservice
   rpc Check(github.com.oojob.protobuf.HealthCheckRequest)

@@ -175,11 +175,11 @@ service ProfileService {
 
   /// ProfileService  ValidateUsername :- help's us to validate username
   /// availability
-  rpc ValidateUsername(ValidateUsernameReq)
+  rpc ValidateUsername(ValidateUsernameRequest)
       returns (github.com.oojob.protobuf.DefaultResponse);
 
   /// ProfileService ValidateEmail :- help's us to validate email availability
-  rpc ValidateEmail(ValidateEmailReq)
+  rpc ValidateEmail(ValidateEmailRequest)
       returns (github.com.oojob.protobuf.DefaultResponse);
 
   /// Used to check health status of the running microservice

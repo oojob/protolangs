@@ -69,6 +69,7 @@ function buildProtoForTypes {
   mkdir -p build/doc/protobuf
   mkdir -p build/doc/oojob-protobuf
   cp build/node/oojob-protobuf/doc/index.html build/doc/oojob-protobuf/
+  cp build/go/protobuf/doc/index.html build/doc/protobuf/
   rm -rf gen
 
   commitAndPush build/go/protobuf
@@ -124,7 +125,7 @@ function buildProtoForTypes {
   done
 
   nohup npx serve -d build/doc &
-  sleep 1
+  sleep 5
   wget localhost:5000
   mv index.html build/doc
   killall -9 node
