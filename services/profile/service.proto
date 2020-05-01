@@ -1,7 +1,12 @@
-/**
- * Profile entity related messages.
+/*
+ * Created on Sun Apr 28 2020
  *
- * This file is resposible for all operation related to profile entity.
+ * Profile related messages.
+ * This file is resposible for all operation related to profile.
+ *
+ * @author nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojobs
  */
 syntax = "proto3";
 
@@ -13,35 +18,175 @@ import "google/protobuf/timestamp.proto";
 
 package profile;
 
+/**
+ * Education help's us to identify the data and also weather or not we need to
+ * show it on the public profile"
+ */
 message Education {
+  /// Education education :- school/college name which should be your primary
+  /// education
   string education = 1;
+
+  /// Education show :- weather or not you want to show the education on public
   bool show = 2;
 }
 
-message Profile {
-  github.com.oojob.protobuf.Identifier identity = 1;
-  string profile_type = 2;
-  string type_token = 3;
-  string given_name = 4;
-  string middle_name = 5;
-  string family_name = 6;
-  github.com.oojob.protobuf.Email email = 7;
-  string gender = 8;
-  google.protobuf.Timestamp birthdate = 9;
-  string current_position = 10;
-  Education education = 11;
-  github.com.oojob.protobuf.Address address = 12;
-  github.com.oojob.protobuf.Metadata metadata = 13;
+/**
+ * ProfileSecurity help's us to maintain data related to profile security
+ * aspects
+ */
+message ProfileSecurity {
+  /// ProfileSecurity password :- help's us to store encrypted password
+  string password = 1;
+
+  /// ProfileSecurity password_salt :- help's us to store password salt round
+  /// it will help us in long term when migrating to other auth providers
+  string password_salt = 2;
+
+  /// ProfileSecurity password_hash :- secret used for password hash
+  /// still working on it
+  string password_hash = 3;
+
+  /// ProfileSecurity code :- security code based on ccurrenccct usuage
+  /// For ex: for password reset, we will use to set code for password reset
+  string code = 4;
+
+  /// ProfileSecurity code_type :- the code geneated above will give meaning
+  /// that how that generated peice of ode should be used
+  string code_type = 5;
+
+  /// ProfileSecurity account_type :- weather the account belong's to job
+  /// provide or job seeker
+  string account_type = 6;
+
+  /// ProfileSecurity verified :- weather the profile is verified or nots
+  bool verified = 7;
 }
 
-message ProfileResponse { bool status = 1; }
+/**
+ * Profile help's us to store one's profile.
+ * it will help us to identify the base entity and it act's as a base connector
+ * for different domain.
+ */
+message Profile {
+  /// Profile identifier :- base iddentifier act's as unique identifier
+  github.com.oojob.protobuf.Identifier identity = 1;
 
+  /// Profile given_name :- act's as first name
+  string given_name = 2;
+
+  /// Profile middle_name :- user's middlename and it's optional
+  string middle_name = 3;
+
+  /// Profile family_name :- last name or sirname
+  string family_name = 4;
+
+  /// Profile username :- it should be unique and it help's us
+  /// to identify uniquely
+  string username = 5;
+
+  /// Profile email :- email address of the user
+  github.com.oojob.protobuf.Email email = 6;
+
+  /// Profile gender :- it should be based on choice
+  string gender = 7;
+
+  /// Profile birthdate :- user's birthdate
+  google.protobuf.Timestamp birthdate = 8;
+
+  /// Profile current_position :- where he works and at what position
+  string current_position = 9;
+
+  /// Profile education :- primary education
+  Education education = 10;
+
+  /// Profile address :- address of the preferred user
+  github.com.oojob.protobuf.Address address = 11;
+
+  /// Profile metadata :- metadata related to the user
+  github.com.oojob.protobuf.Metadata metadata = 12;
+}
+
+/**
+ * ConfirmProfileRequest :- request object for confirming profile
+ * either username/email has to be filled for confirmation
+ */
+message ConfirmProfileRequest {
+  /// ConfirmProfileRequest username :- help's us to idenity
+  /// whose profile we need to confirm
+  string username = 1;
+
+  /// ConfirmProfileRequest email :- help's us to idenity
+  /// whose profile we need to confirm
+  string email = 2;
+
+  /// ConfirmProfileRequest token :- help's us to idenity whose profile
+  /// we need to confirm with the help of passed token
+  string token = 3;
+}
+
+/**
+ * ReadProfileRequest help's to to pass profile ID whose profile data we are
+ * required to ask
+ */
+message ReadProfileRequest {
+  /// ReadProfileRequest account_id :- preferred account id
+  /// whose data we need to search
+  string account_id = 1;
+}
+
+/**
+ * ValidateUsernameRequest :- username validation request
+ */
+message ValidateUsernameRequest {
+  /// ValidateUsernameRequest username :- username which we want to validate
+  string username = 1;
+}
+
+/**
+ * ValidateEmailRequest :- email validation request
+ */
+message ValidateEmailRequest {
+  /// ValidateEmailRequest email :- email which we want to validate
+  string email = 1;
+}
+
+/**
+ * ProfileService responsible for profile microservice operation.
+ * more info can be found at : https://github.com/oojob/service-profile
+ * project: github.com/oojob
+ * how does this profile service work as a full microservice
+ * - we need to create profile or in other term's signup
+ * - then we can login to view profile and then perform profile operation
+ */
 service ProfileService {
-  rpc CreateProfile(Profile) returns (ProfileResponse);
+  /// ProfileService CreateProfile :- help's uo to create a profile
+  rpc CreateProfile(Profile) returns (Profile);
 
+  /// ProfileService ConfirmProfile :- help's us to verify the profile
+  rpc ConfirmProfile(ConfirmProfileRequest)
+      returns (github.com.oojob.protobuf.DefaultResponse);
+
+  /// ProfileService ReadProfile :- help's us to read the entire profile data
+  rpc ReadProfile(ReadProfileRequest) returns (Profile);
+
+  /// ProfileService UpdateProfile :- help's us to update the profile
+  rpc UpdateProfile(Profile) returns (Profile);
+
+  /// ProfileService  ValidateUsername :- help's us to validate username
+  /// availability
+  rpc ValidateUsername(ValidateUsernameReq)
+      returns (github.com.oojob.protobuf.DefaultResponse);
+
+  /// ProfileService ValidateEmail :- help's us to validate email availability
+  rpc ValidateEmail(ValidateEmailReq)
+      returns (github.com.oojob.protobuf.DefaultResponse);
+
+  /// Used to check health status of the running microservice
   rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
       returns (github.com.oojob.protobuf.HealthCheckResponse);
 
+  /// Used to check health status of the running microservice as stream
   rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
       returns (stream github.com.oojob.protobuf.HealthCheckResponse);
 }

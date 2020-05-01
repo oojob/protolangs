@@ -11,6 +11,8 @@
  */
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 package github.com.oojob.protobuf;
 
 /**
@@ -28,6 +30,20 @@ message Range {
  * Empty is used in those place where don't have any input request
  */
 message Empty {}
+
+/**
+ * DefaultResponse act's as a default response for our standard use case
+ */
+message DefaultResponse {
+  /// DefaultResponse status :- weather the performed operation succedded or not
+  bool status = 1;
+
+  /// DefaultResponse error :- what's the error if existed based on status
+  string error = 2;
+
+  /// DefaultResponse code :- what's the code for the error which originated
+  int64 code = 3;
+}
 
 /**
  * Id help's us to define id as reusable peice
@@ -67,8 +83,23 @@ message Attachment {
   /// appropiate view for example: type = PDF || type = JPEG
   string type = 1;
 
-  /// Attachment file :- file upload for this attachment
+  /// Attachment file :- file upload for this attachment same as `name`
   string file = 2;
+
+  /// Attachment upload_date :- date time on which the attachment was uploaded
+  google.protobuf.Timestamp upload_date = 3;
+
+  /// Attachment url :- generated url for the attachment
+  string url = 4;
+
+  /// Attachment user :- user who upload the attachment
+  /// it will store the user id who stored the attachment
+  string user = 5;
+
+  /// folder :- which describe where to put it
+  /// for example for ccompanies in S3 there is a seperate folder for companies
+  /// for user profiles there is a seperate folder for user profile
+  string folder = 6;
 }
 
 /**
