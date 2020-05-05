@@ -13,6 +13,8 @@ syntax = "proto3";
 
 package github.com.oojob.protobuf;
 
+option go_package = "github.com.oojob.protobuf";
+
 /**
  * HealthCheckRequest official grpc health check request stub
  * Health checks are used to probe whether the server is able to handle rpcs.

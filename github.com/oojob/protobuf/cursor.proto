@@ -12,6 +12,8 @@ syntax = "proto3";
 
 package github.com.oojob.protobuf;
 
+option go_package = "github.com.oojob.protobuf";
+
 /**
  * Pagination help's us to paginate large set of data through curser based
  where

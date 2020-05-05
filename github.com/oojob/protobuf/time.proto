@@ -15,6 +15,8 @@ import "google/protobuf/timestamp.proto";
 
 package github.com.oojob.protobuf;
 
+option go_package = "github.com.oojob.protobuf";
+
 // DaysOfWeek help's us to represent days on week in order
 enum DaysOfWeek {
   MONDAY = 0;

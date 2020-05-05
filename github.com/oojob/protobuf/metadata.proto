@@ -18,6 +18,8 @@ import "google/protobuf/timestamp.proto";
 
 package github.com.oojob.protobuf;
 
+option go_package = "github.com.oojob.protobuf";
+
 /**
  * Metadata it should be attached with higher level entity
  * It will provide you with additional attachment of time based which will
