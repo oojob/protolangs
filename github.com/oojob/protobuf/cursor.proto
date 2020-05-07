@@ -1,10 +1,12 @@
 /**
  * Created on Sun Apr 28 2020
+ * Lasted Updated on Thu May 7 2020 by Naseem Ali
  *
  * Base entity protobuf for cursor.
  * This file is resposible for storing all the base protobuff `message`.
  *
  * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ * @authors naseem.ali.925@gmail.com (Naseem Ali)
  *
  * Copyright (c) 2020 - oojob
  */
@@ -48,4 +50,31 @@ message Pagination {
 
   /// Pagination :- next curser for data
   string next = 6;
+}
+
+/**
+ * Pagination for Job Listing by company
+ * Used in ReadAllJobsByCompany
+ */
+message JobsPagination {
+  /// Pagination first :- first x value to take out of fetched result
+  int64 first = 1;
+
+  /// Pagination after :- after fetching skip the first x items
+  string after = 2;
+
+  /// Pagination offset :- standard offset in pagination
+  string offset = 3;
+
+  /// Pagination limit :- standard limit in pagination
+  int64 limit = 4;
+
+  /// Pagination previous :- previous curser for data
+  string previous = 5;
+
+  /// Pagination :- next curser for data
+  string next = 6;
+
+  /// companyId: Is the id of company that create this job.
+  string companyId = 7;
 }

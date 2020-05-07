@@ -1,5 +1,6 @@
 /*
  * Created on Sun Apr 27 2020
+* Lasted Updated on Thu May 7 2020 by Naseem Ali
  *
  * Job entity related messages.
  * This file is resposible for all operation related to job entity.
@@ -75,6 +76,8 @@ service JobService {
 
   rpc DeleteJob(github.com.oojob.protobuf.Id) returns (github.com.oojob.protobuf.Id);
   
+  rpc ReadAllJobsByCompany(github.com.oojob.protobuf.JobsPagination) returns (JobAllResponse);
+
   rpc ReadAllJobs(github.com.oojob.protobuf.Pagination) returns (JobAllResponse);
 
   rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
