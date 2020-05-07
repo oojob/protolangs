@@ -17,6 +17,7 @@ import "github.com/oojob/protobuf/time.proto";
 import "github.com/oojob/protobuf/system.proto";
 import "github.com/oojob/protobuf/health.proto";
 import "github.com/oojob/protobuf/applicants.proto";
+import "github.com/oojob/protobuf/cursor.proto";
 
 package job;
 
