@@ -10,6 +10,8 @@
 # protocol buffers code review
 *.proto @nirajgeorgian
 
+services/job/* @naseemali925 @nirajgeorgian
+
 # protocol generation language specif file code review
 *.protolangs @nirajgeorgian
 

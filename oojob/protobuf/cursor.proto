@@ -1,10 +1,12 @@
 /**
  * Created on Sun Apr 28 2020
+ * Lasted Updated on Thu May 7 2020 by Naseem Ali
  *
  * Base entity protobuf for cursor.
  * This file is resposible for storing all the base protobuff `message`.
  *
  * @authors nirajgeorgian@oojob.io (Niraj Kishore)
+ * @authors naseem.ali.925@gmail.com (Naseem Ali)
  *
  * Copyright (c) 2020 - oojob
  */
@@ -48,4 +50,7 @@ message Pagination {
 
   /// Pagination :- next curser for data
   string next = 6;
+
+  /// Entity id (JOB | CCOMPANY | PROFILES)
+  string identifier = 7;
 }

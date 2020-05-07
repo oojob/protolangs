@@ -1,5 +1,6 @@
 /*
  * Created on Sun Apr 27 2020
+ * Lasted Updated on Thu May 7 2020 by Naseem Ali
  *
  * Job entity related messages.
  * This file is resposible for all operation related to job entity.
@@ -17,63 +18,72 @@ import "oojob/protobuf/time.proto";
 import "oojob/protobuf/system.proto";
 import "oojob/protobuf/health.proto";
 import "oojob/protobuf/applicants.proto";
+import "oojob/protobuf/cursor.proto";
 
 package job;
 
 message Job {
+  /// company identifier: Is the id of company that create this job.
   oojob.protobuf.Identifier identity = 1;
 
+  /// employment: Denotes the employment type for this job.
   string employment = 2; // fulltime/ parttime / remote
+
+  /// salary: Used to define salary range offered for this job.
   oojob.protobuf.Range salary = 3;
+
+  /// salary: Used to define experience(years) required for this job.
   oojob.protobuf.Range experience = 4;
+
+  /// valid_from: Used to define date that the job becomes valid for applicants.
+  /// valid_through: Used to define date that the job becomes invalid for
+  /// applicants.
   oojob.protobuf.Time time = 5;
+
+  /// skills: Used to define the skills required for this job. e.g
+  /// [java,javascript,c++,..,c]
   repeated string skills = 6;
+
   string working_hours = 7;
+
+  /// status: Indicates if the job is open||closed||expired||blocked
   string status = 8; // opened / closed / block / expired
+
+  /// qualifications: Used to define the qualifications required for this job.
+  /// e.g [BS,MS,A Level,..,O Level]
   repeated string qualification = 9;
-  oojob.protobuf.Place place = 10;
-  oojob.protobuf.Metadata metadata = 11;
-  oojob.protobuf.Applicant applicants = 12;
+
+  /// type: Indicates if the job is remote||inoffice||contract||parttime||full
+  /// time
+  string type = 10;
+
+  oojob.protobuf.Place place = 11;
+
+  oojob.protobuf.Metadata metadata = 12;
+
+  oojob.protobuf.Applicant applicants = 13;
 }
 
-message CreateJobReq {
-  // companyId: Is the id of company that create this job.
-  string companyId = 1;
-  // employment: Denotes the employment type for this job.
-  string employment = 2; // fulltime/ parttime / remote
-  // salary: Used to define salary range offered for this job.
-  oojob.protobuf.Range salary = 3;
-  // salary: Used to define experience(years) required for this job.
-  oojob.protobuf.Range experience = 4;
-  // valid_from: Used to define date that the job becomes valid for applicants.
-  google.protobuf.Timestamp valid_from = 5;
-  // valid_through: Used to define date that the job becomes invalid for
-  // applicants.
-  google.protobuf.Timestamp valid_through = 6;
-  // skills: Used to define the skills required for this job. e.g
-  // [java,javascript,c++,..,c]
-  repeated string skills = 7;
-  // status: Indicates if the job is open||closed||expired||blocked
-  string status = 8; // opened / closed / block / expired
-  // qualifications: Used to define the qualifications required for this job.
-  // e.g [BS,MS,A Level,..,O Level]
-  repeated string qualifications = 9;
-  // type: Indicates if the job is remote||inoffice||contract||parttime||full
-  // time
-  string type = 10;
-  // title: Defines the job title e.g SDE, SDE2, System Engineer, Network
-  // Engineer
-  string title = 11;
-  // location: Defined the job location.
-  Address location = 12;
-}
-message CreateJobRes {
-  bool status = 1;
-  string id = 2;
+/*
+ * JobAllResponse returns an array of jobs
+ */
+message JobAllResponse {
+  /// JobAllResponse jobs :- all jobs as array
+  repeated Job jobs = 1;
 }
 
 service JobService {
-  rpc CreateJob(CreateJobReq) returns (CreateJobRes);
+  rpc CreateJob(Job) returns (oojob.protobuf.Id);
+
+  rpc ReadJob(oojob.protobuf.Id) returns (Job);
+
+  rpc UpdateJob(Job) returns (oojob.protobuf.Id);
+
+  rpc DeleteJob(oojob.protobuf.Id) returns (oojob.protobuf.Id);
+
+  rpc ReadAllJobsByCompany(oojob.protobuf.Pagination) returns (JobAllResponse);
+
+  rpc ReadAllJobs(oojob.protobuf.Pagination) returns (JobAllResponse);
 
   rpc Check(oojob.protobuf.HealthCheckRequest)
       returns (oojob.protobuf.HealthCheckResponse);

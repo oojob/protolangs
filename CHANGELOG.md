@@ -1,9 +1,39 @@
-### added some metadata (HEAD -> master)
+### added some metadata
 >Thu, 7 May 2020 19:10:21 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
 
 >Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### Updated Jobs Service and Added JobsPagination to cursor.proto (origin/master)
+>Thu, 7 May 2020 17:29:00 +0530
+
+>Author: naseemali925 (naseem.ali.925@gmail.com)
+
+>Commiter: naseemali925 (naseem.ali.925@gmail.com)
+
+
+
+
+### Updated Jobs Service
+>Thu, 7 May 2020 17:15:45 +0530
+
+>Author: naseemali925 (naseem.ali.925@gmail.com)
+
+>Commiter: naseemali925 (naseem.ali.925@gmail.com)
+
+
+
+
+### Updated Jobs Service
+>Thu, 7 May 2020 17:11:46 +0530
+
+>Author: naseemali925 (naseem.ali.925@gmail.com)
+
+>Commiter: naseemali925 (naseem.ali.925@gmail.com)
 
 
 
