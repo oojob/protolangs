@@ -20,7 +20,7 @@ import "github.com/oojob/protobuf/applicants.proto";
 
 package job;
 
-message Job {
+message JobOld {
   github.com.oojob.protobuf.Identifier identity = 1;
   string employment = 2; // fulltime/ parttime / remote
   github.com.oojob.protobuf.Range salary = 3;
@@ -35,7 +35,7 @@ message Job {
   github.com.oojob.protobuf.Applicant applicants = 12;
 }
 
-message CreateJobReq {
+message Job {
   // companyId: Is the id of company that create this job.
   string companyId = 1;
   // employment: Denotes the employment type for this job.
@@ -54,20 +54,27 @@ message CreateJobReq {
   string status = 8; // opened / closed / block / expired
   // qualifications: Used to define the qualifications required for this job. e.g [BS,MS,A Level,..,O Level]
   repeated string qualifications = 9;
-  // type: Indicates if the job is remote||inoffice||contract||parttime||full time
-  string type = 10;
   // title: Defines the job title e.g SDE, SDE2, System Engineer, Network Engineer
-  string title = 11;
+  string title = 10;
   // location: Defined the job location.
-  Address location = 12;
-}
-message CreateJobRes {
-  bool status = 1;
-  string id = 2;
+  Address location = 11;
 }
 
+/*
+ * JobAllResponse returns an array of jobs
+ */
+ message JobAllResponse { repeated Job jobs = 1; }
+
 service JobService {
-  rpc CreateJob(CreateJobReq) returns (CreateJobRes);
+  rpc CreateJob(Job) returns (github.com.oojob.protobuf.Id);
+
+  rpc ReadJob(github.com.oojob.protobuf.Id) returns (Job);
+
+  rpc UpdateJob(Job) returns (github.com.oojob.protobuf.Id);
+
+  rpc DeleteJob(github.com.oojob.protobuf.Id) returns (github.com.oojob.protobuf.Id);
+  
+  rpc ReadAllJobs(github.com.oojob.protobuf.Pagination) returns (JobAllResponse);
 
   rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
       returns (github.com.oojob.protobuf.HealthCheckResponse);
