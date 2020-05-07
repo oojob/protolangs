@@ -11,28 +11,29 @@
  */
 syntax = "proto3";
 
-import "github.com/oojob/protobuf/place.proto";
-import "github.com/oojob/protobuf/metadata.proto";
-import "github.com/oojob/protobuf/time.proto";
-import "github.com/oojob/protobuf/system.proto";
-import "github.com/oojob/protobuf/health.proto";
-import "github.com/oojob/protobuf/applicants.proto";
+import "oojob/protobuf/place.proto";
+import "oojob/protobuf/metadata.proto";
+import "oojob/protobuf/time.proto";
+import "oojob/protobuf/system.proto";
+import "oojob/protobuf/health.proto";
+import "oojob/protobuf/applicants.proto";
 
 package job;
 
 message Job {
-  github.com.oojob.protobuf.Identifier identity = 1;
+  oojob.protobuf.Identifier identity = 1;
+
   string employment = 2; // fulltime/ parttime / remote
-  github.com.oojob.protobuf.Range salary = 3;
-  github.com.oojob.protobuf.Range experience = 4;
-  github.com.oojob.protobuf.Time time = 5;
+  oojob.protobuf.Range salary = 3;
+  oojob.protobuf.Range experience = 4;
+  oojob.protobuf.Time time = 5;
   repeated string skills = 6;
   string working_hours = 7;
   string status = 8; // opened / closed / block / expired
   repeated string qualification = 9;
-  github.com.oojob.protobuf.Place place = 10;
-  github.com.oojob.protobuf.Metadata metadata = 11;
-  github.com.oojob.protobuf.Applicant applicants = 12;
+  oojob.protobuf.Place place = 10;
+  oojob.protobuf.Metadata metadata = 11;
+  oojob.protobuf.Applicant applicants = 12;
 }
 
 message CreateJobReq {
@@ -41,22 +42,27 @@ message CreateJobReq {
   // employment: Denotes the employment type for this job.
   string employment = 2; // fulltime/ parttime / remote
   // salary: Used to define salary range offered for this job.
-  github.com.oojob.protobuf.Range salary = 3;
+  oojob.protobuf.Range salary = 3;
   // salary: Used to define experience(years) required for this job.
-  github.com.oojob.protobuf.Range experience = 4;
+  oojob.protobuf.Range experience = 4;
   // valid_from: Used to define date that the job becomes valid for applicants.
   google.protobuf.Timestamp valid_from = 5;
-  // valid_through: Used to define date that the job becomes invalid for applicants.
+  // valid_through: Used to define date that the job becomes invalid for
+  // applicants.
   google.protobuf.Timestamp valid_through = 6;
-  // skills: Used to define the skills required for this job. e.g [java,javascript,c++,..,c]
+  // skills: Used to define the skills required for this job. e.g
+  // [java,javascript,c++,..,c]
   repeated string skills = 7;
   // status: Indicates if the job is open||closed||expired||blocked
   string status = 8; // opened / closed / block / expired
-  // qualifications: Used to define the qualifications required for this job. e.g [BS,MS,A Level,..,O Level]
+  // qualifications: Used to define the qualifications required for this job.
+  // e.g [BS,MS,A Level,..,O Level]
   repeated string qualifications = 9;
-  // type: Indicates if the job is remote||inoffice||contract||parttime||full time
+  // type: Indicates if the job is remote||inoffice||contract||parttime||full
+  // time
   string type = 10;
-  // title: Defines the job title e.g SDE, SDE2, System Engineer, Network Engineer
+  // title: Defines the job title e.g SDE, SDE2, System Engineer, Network
+  // Engineer
   string title = 11;
   // location: Defined the job location.
   Address location = 12;
@@ -69,9 +75,9 @@ message CreateJobRes {
 service JobService {
   rpc CreateJob(CreateJobReq) returns (CreateJobRes);
 
-  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
 
-  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
 }

@@ -10,7 +10,7 @@
  */
 syntax = "proto3";
 
-import "github.com/oojob/protobuf/health.proto";
+import "oojob/protobuf/health.proto";
 
 package code;
 
@@ -38,9 +38,9 @@ message CodeResponse {
 service CodeService {
   rpc SubmitCode(CodeRequest) returns (CodeResponse);
 
-  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
 
-  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
 }

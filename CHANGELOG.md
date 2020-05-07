@@ -1,4 +1,24 @@
-### added common go package (HEAD -> master)
+### added some metadata (HEAD -> master)
+>Thu, 7 May 2020 19:10:21 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### Added CreateJobReq proto
+>Wed, 6 May 2020 18:04:21 +0530
+
+>Author: naseemali925 (naseem.ali.925@gmail.com)
+
+>Commiter: naseemali925 (naseem.ali.925@gmail.com)
+
+
+
+
+### added common go package
 >Tue, 5 May 2020 15:49:14 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +28,7 @@
 
 
 
-### added refrence for mismatched types (origin/master)
+### added refrence for mismatched types
 >Sat, 2 May 2020 01:35:14 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

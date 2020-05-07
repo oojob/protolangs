@@ -10,13 +10,15 @@
  */
 syntax = "proto3";
 
-import "github.com/oojob/protobuf/system.proto";
-import "github.com/oojob/protobuf/metadata.proto";
-import "github.com/oojob/protobuf/place.proto";
-import "github.com/oojob/protobuf/health.proto";
+import "oojob/protobuf/system.proto";
+import "oojob/protobuf/metadata.proto";
+import "oojob/protobuf/place.proto";
+import "oojob/protobuf/health.proto";
 import "google/protobuf/timestamp.proto";
 
 package profile;
+
+option go_package = "github.com.protorepo-profile-go";
 
 /**
  * Education help's us to identify the data and also weather or not we need to
@@ -70,7 +72,7 @@ message ProfileSecurity {
  */
 message Profile {
   /// Profile identifier :- base iddentifier act's as unique identifier
-  github.com.oojob.protobuf.Identifier identity = 1;
+  oojob.protobuf.Identifier identity = 1;
 
   /// Profile given_name :- act's as first name
   string given_name = 2;
@@ -86,7 +88,7 @@ message Profile {
   string username = 5;
 
   /// Profile email :- email address of the user
-  github.com.oojob.protobuf.Email email = 6;
+  oojob.protobuf.Email email = 6;
 
   /// Profile gender :- it should be based on choice
   string gender = 7;
@@ -101,10 +103,10 @@ message Profile {
   Education education = 10;
 
   /// Profile address :- address of the preferred user
-  github.com.oojob.protobuf.Address address = 11;
+  oojob.protobuf.Address address = 11;
 
   /// Profile metadata :- metadata related to the user
-  github.com.oojob.protobuf.Metadata metadata = 12;
+  oojob.protobuf.Metadata metadata = 12;
 }
 
 /**
@@ -165,7 +167,7 @@ service ProfileService {
 
   /// ProfileService ConfirmProfile :- help's us to verify the profile
   rpc ConfirmProfile(ConfirmProfileRequest)
-      returns (github.com.oojob.protobuf.DefaultResponse);
+      returns (oojob.protobuf.DefaultResponse);
 
   /// ProfileService ReadProfile :- help's us to read the entire profile data
   rpc ReadProfile(ReadProfileRequest) returns (Profile);
@@ -176,17 +178,17 @@ service ProfileService {
   /// ProfileService  ValidateUsername :- help's us to validate username
   /// availability
   rpc ValidateUsername(ValidateUsernameRequest)
-      returns (github.com.oojob.protobuf.DefaultResponse);
+      returns (oojob.protobuf.DefaultResponse);
 
   /// ProfileService ValidateEmail :- help's us to validate email availability
   rpc ValidateEmail(ValidateEmailRequest)
-      returns (github.com.oojob.protobuf.DefaultResponse);
+      returns (oojob.protobuf.DefaultResponse);
 
   /// Used to check health status of the running microservice
-  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
 
   /// Used to check health status of the running microservice as stream
-  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
 }

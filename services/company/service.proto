@@ -10,11 +10,11 @@
  */
 syntax = "proto3";
 
-import "github.com/oojob/protobuf/system.proto";
-import "github.com/oojob/protobuf/place.proto";
-import "github.com/oojob/protobuf/metadata.proto";
-import "github.com/oojob/protobuf/cursor.proto";
-import "github.com/oojob/protobuf/health.proto";
+import "oojob/protobuf/system.proto";
+import "oojob/protobuf/place.proto";
+import "oojob/protobuf/metadata.proto";
+import "oojob/protobuf/cursor.proto";
+import "oojob/protobuf/health.proto";
 
 package company;
 
@@ -22,16 +22,16 @@ package company;
  * Comapny is used for storing companies data
  */
 message Company {
-  github.com.oojob.protobuf.Identifier identity = 1;
+  oojob.protobuf.Identifier identity = 1;
   string admin = 2;
   string url = 3;
   string logo = 4;
-  github.com.oojob.protobuf.Range employees = 5;
-  github.com.oojob.protobuf.Place place = 6;
+  oojob.protobuf.Range employees = 5;
+  oojob.protobuf.Place place = 6;
   string founded_year = 7;
   bool hiring_status = 8;
   repeated string skills = 9;
-  github.com.oojob.protobuf.Metadata metadata = 10;
+  oojob.protobuf.Metadata metadata = 10;
 }
 
 /*
@@ -43,23 +43,21 @@ message CompanyAllResponse { repeated Company companies = 1; }
  * CompanyService service file for company entity
  */
 service CompanyService {
-  rpc CreateCompany(Company) returns (github.com.oojob.protobuf.Id);
+  rpc CreateCompany(Company) returns (oojob.protobuf.Id);
 
-  rpc ReadCompany(github.com.oojob.protobuf.Id) returns (Company);
+  rpc ReadCompany(oojob.protobuf.Id) returns (Company);
 
-  rpc ReadCompanies(github.com.oojob.protobuf.Empty) returns (stream Company);
+  rpc ReadCompanies(oojob.protobuf.Empty) returns (stream Company);
 
-  rpc ReadAllCompanies(github.com.oojob.protobuf.Pagination)
-      returns (CompanyAllResponse);
+  rpc ReadAllCompanies(oojob.protobuf.Pagination) returns (CompanyAllResponse);
 
-  rpc UpdateCompany(Company) returns (github.com.oojob.protobuf.Id);
+  rpc UpdateCompany(Company) returns (oojob.protobuf.Id);
 
-  rpc DeleteCompany(github.com.oojob.protobuf.Id)
-      returns (github.com.oojob.protobuf.Id);
+  rpc DeleteCompany(oojob.protobuf.Id) returns (oojob.protobuf.Id);
 
-  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Check(oojob.protobuf.HealthCheckRequest)
+      returns (oojob.protobuf.HealthCheckResponse);
 
-  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
-      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
+  rpc Watch(oojob.protobuf.HealthCheckRequest)
+      returns (stream oojob.protobuf.HealthCheckResponse);
 }
