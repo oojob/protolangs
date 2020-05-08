@@ -53,27 +53,27 @@ function buildProtoForTypes {
   # target=${1%/}
   # echo $target
 
-  # rm -rf build/doc
-  # git clone git@github.com:oojob/oojob.github.io build/doc
+  rm -rf build/doc
+  git clone git@github.com:oojob/oojob.github.io build/doc
 
-  # docker run -v `pwd`:/defs namely/protoc-all -d oojob/protobuf -l go --with-docs --lint --with-validator
-  # rm -rf build/go/protobuf
-  # git clone git@github.com:oojob/protobuf.git build/go/protobuf
-  # cp -R gen/pb-go/* build/go/protobuf/
+  docker run -v `pwd`:/defs namely/protoc-all -d oojob/protobuf -l go --with-docs --lint --with-validator
+  rm -rf build/go/protobuf
+  git clone git@github.com:oojob/protobuf.git build/go/protobuf
+  cp -R gen/pb-go/* build/go/protobuf/
 
-  # docker run -v `pwd`:/defs namely/protoc-all -d oojob/protobuf -l node --with-docs --lint --with-typescript
-  # rm -rf build/node/oojob-protobuf
-  # git clone git@github.com:oojob/oojob-protobuf.git build/node/oojob-protobuf
-  # cp -R gen/pb-node/* build/node/oojob-protobuf/
+  docker run -v `pwd`:/defs namely/protoc-all -d oojob/protobuf -l node --with-docs --lint --with-typescript
+  rm -rf build/node/oojob-protobuf
+  git clone git@github.com:oojob/oojob-protobuf.git build/node/oojob-protobuf
+  cp -R gen/pb-node/* build/node/oojob-protobuf/
 
-  # mkdir -p build/doc/protobuf
-  # mkdir -p build/doc/oojob-protobuf
-  # cp build/node/oojob-protobuf/doc/index.html build/doc/oojob-protobuf/
-  # cp build/go/protobuf/doc/index.html build/doc/protobuf/
-  # rm -rf gen
+  mkdir -p build/doc/protobuf
+  mkdir -p build/doc/oojob-protobuf
+  cp build/node/oojob-protobuf/doc/index.html build/doc/oojob-protobuf/
+  cp build/go/protobuf/doc/index.html build/doc/protobuf/
+  rm -rf gen
 
-  # commitAndPush build/go/protobuf
-  # commitAndPush build/node/oojob-protobuf
+  commitAndPush build/go/protobuf
+  commitAndPush build/node/oojob-protobuf
 
   # BASE_PACKAGE=$target/oojob
   for src in */; do
@@ -81,8 +81,7 @@ function buildProtoForTypes {
       for target in `pwd`/services/*; do
         if [ -f $target/.protolangs ]; then
           while read lang; do
-          # build the repo name
-          # space is set as delimiter
+          # build the repo name space is set as delimiter
           IFS='/' read -r directory <<< "$target"
           dir=${target##*/}
 
@@ -106,12 +105,19 @@ function buildProtoForTypes {
           # Copy the generated files out of the pb-* path into the repository that we care about
           cp -R gen/pb-$lang/services/$dir/* gen/pb-$lang/
           rm -rf gen/pb-$lang/services
+
+          # modify necessary changes
+          if [ $lang == 'node' ]; then
+            find  gen/pb-$lang/* -not \( -path /node_modules/ \) -type f -exec sed -i '' -e "s/..\/..\/services\/$dir/./g" {} \;
+            find  gen/pb-$lang/* -not \( -path /node_modules/ \) -type f -exec sed -i '' -e 's/..\/..\/oojob\/protobuf/@oojob\/oojob-protobuf/g' {} \;
+          fi
+
           cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
           rm -rf gen
           mkdir -p $REPOPATH/doc/$reponame
           cp $REPOPATH/$lang/$reponame/doc/index.html $REPOPATH/doc/$reponame/
 
-          # commitAndPush $REPOPATH/$lang/$reponame
+          commitAndPush $REPOPATH/$lang/$reponame
           # if [ $lang == "node" ]
           # then
           #   commitAndPushNpmPackage $REPOPATH/$lang/$reponame
@@ -130,7 +136,7 @@ function buildProtoForTypes {
   mv index.html build/doc
   killall -9 node
 
-  # commitAndPush build/doc
+  commitAndPush build/doc
 }
 
 function setupBranch {

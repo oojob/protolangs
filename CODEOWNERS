@@ -9,6 +9,7 @@
 
 # protocol buffers code review
 *.proto @nirajgeorgian
+*.sh @nirajgeorgian
 
 services/job/* @naseemali925 @nirajgeorgian
 

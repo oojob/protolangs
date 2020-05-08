@@ -1,3 +1,13 @@
+### added option to build node package (HEAD -> master)
+>Fri, 8 May 2020 09:45:24 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
 ### added some metadata
 >Thu, 7 May 2020 19:10:21 +0530
 
@@ -8,7 +18,7 @@
 
 
 
-### Updated Jobs Service and Added JobsPagination to cursor.proto (origin/master)
+### Updated Jobs Service and Added JobsPagination to cursor.proto
 >Thu, 7 May 2020 17:29:00 +0530
 
 >Author: naseemali925 (naseem.ali.925@gmail.com)
