@@ -1,4 +1,14 @@
-### added option to build node package (HEAD -> master)
+### added refactor (HEAD -> master)
+>Fri, 8 May 2020 22:47:59 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added option to build node package (origin/master)
 >Fri, 8 May 2020 09:45:24 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

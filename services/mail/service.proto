@@ -11,10 +11,10 @@
  */
 syntax = "proto3";
 
-import "oojob/protobuf/health.proto";
+import "github.com/oojob/protobuf/health.proto";
+import "github.com/oojob/protobuf/metadata.proto";
+import "github.com/oojob/protobuf/system.proto";
 import "google/protobuf/struct.proto";
-import "oojob/protobuf/metadata.proto";
-import "oojob/protobuf/system.proto";
 
 package mail;
 
@@ -38,7 +38,7 @@ message Mail {
   string message = 4;
 
   /// all the attachment needed to send for ex: PDF or an image
-  repeated oojob.protobuf.Attachment attachments = 5;
+  repeated github.com.oojob.protobuf.Attachment attachments = 5;
 
   /// your variable's used for message construction based on template creation
   google.protobuf.Struct variable = 6;
@@ -52,7 +52,7 @@ message Mail {
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  oojob.protobuf.Metadata metadata = 8;
+  github.com.oojob.protobuf.Metadata metadata = 8;
 }
 
 /**
@@ -61,7 +61,7 @@ message Mail {
 message MailBox {
   /// MailBox Identifier :- help's us to represent an base entity
   /// and identity uniquely
-  oojob.protobuf.Identifier identifier = 1;
+  github.com.oojob.protobuf.Identifier identifier = 1;
 
   /// MailBox context help's us to identify on what context
   /// did we sent out the mail
@@ -73,7 +73,7 @@ message MailBox {
 
   /// It will provide you with additional attachment of time based which
   /// will help you to analyze the life process of the entity it attached to
-  oojob.protobuf.Metadata metadata = 8;
+  github.com.oojob.protobuf.Metadata metadata = 8;
 }
 
 /**
@@ -82,7 +82,7 @@ message MailBox {
 message UserMailBox {
   /// UserMailBox Identifier :- help's us to represent an base entity
   /// and identity uniquely
-  oojob.protobuf.Identifier identifier = 1;
+  github.com.oojob.protobuf.Identifier identifier = 1;
 
   /// help's us to store and keep a refrence to all the mail trans.
   /// <"dododduck", "i123disfjf">
@@ -92,7 +92,7 @@ message UserMailBox {
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  oojob.protobuf.Metadata metadata = 8;
+  github.com.oojob.protobuf.Metadata metadata = 8;
 }
 
 /**
@@ -115,7 +115,7 @@ message SendMailReq {
   string message = 4;
 
   /// all the attachment needed to send for ex: PDF or an image
-  repeated oojob.protobuf.Attachment attachments = 5;
+  repeated github.com.oojob.protobuf.Attachment attachments = 5;
 
   /// your variable's used for message construction based on template creation
   google.protobuf.Struct variable = 6;
@@ -154,10 +154,10 @@ service MailService {
   rpc SendMail(SendMailReq) returns (SendMailRes);
 
   /// Used to check health status of the running microservice
-  rpc Check(oojob.protobuf.HealthCheckRequest)
-      returns (oojob.protobuf.HealthCheckResponse);
+  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (github.com.oojob.protobuf.HealthCheckResponse);
 
   /// Used to check health status of the running microservice as stream
-  rpc Watch(oojob.protobuf.HealthCheckRequest)
-      returns (stream oojob.protobuf.HealthCheckResponse);
+  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
 }

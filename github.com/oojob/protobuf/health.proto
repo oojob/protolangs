@@ -11,7 +11,7 @@
  */
 syntax = "proto3";
 
-package oojob.protobuf;
+package github.com.oojob.protobuf;
 
 option go_package = "github.com.oojob.protobuf";
 

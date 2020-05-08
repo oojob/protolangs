@@ -12,7 +12,7 @@
  */
 syntax = "proto3";
 
-package oojob.protobuf;
+package github.com.oojob.protobuf;
 
 option go_package = "github.com.oojob.protobuf";
 
@@ -51,6 +51,6 @@ message Pagination {
   /// Pagination :- next curser for data
   string next = 6;
 
-  /// Entity id (JOB | CCOMPANY | PROFILES)
+  /// Entity id (JOB | COMPANY | PROFILES)
   string identifier = 7;
 }

@@ -56,12 +56,12 @@ function buildProtoForTypes {
   rm -rf build/doc
   git clone git@github.com:oojob/oojob.github.io build/doc
 
-  docker run -v `pwd`:/defs namely/protoc-all -d oojob/protobuf -l go --with-docs --lint --with-validator
+  docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l go --with-docs --lint --with-validator
   rm -rf build/go/protobuf
   git clone git@github.com:oojob/protobuf.git build/go/protobuf
   cp -R gen/pb-go/* build/go/protobuf/
 
-  docker run -v `pwd`:/defs namely/protoc-all -d oojob/protobuf -l node --with-docs --lint --with-typescript
+  docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l node --with-docs --lint --with-typescript
   rm -rf build/node/oojob-protobuf
   git clone git@github.com:oojob/oojob-protobuf.git build/node/oojob-protobuf
   cp -R gen/pb-node/* build/node/oojob-protobuf/
@@ -72,6 +72,7 @@ function buildProtoForTypes {
   cp build/go/protobuf/doc/index.html build/doc/protobuf/
   rm -rf gen
 
+  # push official base repo to github and npm package
   commitAndPush build/go/protobuf
   commitAndPush build/node/oojob-protobuf
 
@@ -98,7 +99,7 @@ function buildProtoForTypes {
 
           # Use the docker container for the language we care about and compile
           PROTO_FILE=services/$dir/service.proto
-          PROTO_INCLUDE=oojob/
+          PROTO_INCLUDE=github.com/
           ADDITIONAL_ARGS=$([ $lang == 'node' ] && echo "--with-typescript" || echo "--with-validator")
           docker run -v `pwd`:/defs namely/protoc-all -f $PROTO_FILE  -i $PROTO_INCLUDE -l $lang --with-docs --lint $ADDITIONAL_ARGS
 
@@ -109,7 +110,7 @@ function buildProtoForTypes {
           # modify necessary changes
           if [ $lang == 'node' ]; then
             find  gen/pb-$lang/* -not \( -path /node_modules/ \) -type f -exec sed -i '' -e "s/..\/..\/services\/$dir/./g" {} \;
-            find  gen/pb-$lang/* -not \( -path /node_modules/ \) -type f -exec sed -i '' -e 's/..\/..\/oojob\/protobuf/@oojob\/oojob-protobuf/g' {} \;
+            find  gen/pb-$lang/* -not \( -path /node_modules/ \) -type f -exec sed -i '' -e 's/..\/..\/github.com\/oojob\/protobuf/@oojob\/oojob-protobuf/g' {} \;
           fi
 
           cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
@@ -117,13 +118,13 @@ function buildProtoForTypes {
           mkdir -p $REPOPATH/doc/$reponame
           cp $REPOPATH/$lang/$reponame/doc/index.html $REPOPATH/doc/$reponame/
 
-          commitAndPush $REPOPATH/$lang/$reponame
-          # if [ $lang == "node" ]
-          # then
-          #   commitAndPushNpmPackage $REPOPATH/$lang/$reponame
-          # else
-          #   commitAndPush $REPOPATH/$lang/$reponame
-          # fi
+          # commitAndPush $REPOPATH/$lang/$reponame
+          if [ $lang == "node" ]
+          then
+            commitAndPushNpmPackage $REPOPATH/$lang/$reponame
+          else
+            commitAndPush $REPOPATH/$lang/$reponame
+          fi
           done < $target/.protolangs
         fi
       done

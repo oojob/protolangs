@@ -12,33 +12,33 @@
  */
 syntax = "proto3";
 
-import "oojob/protobuf/place.proto";
-import "oojob/protobuf/metadata.proto";
-import "oojob/protobuf/time.proto";
-import "oojob/protobuf/system.proto";
-import "oojob/protobuf/health.proto";
-import "oojob/protobuf/applicants.proto";
-import "oojob/protobuf/cursor.proto";
+import "github.com/oojob/protobuf/place.proto";
+import "github.com/oojob/protobuf/metadata.proto";
+import "github.com/oojob/protobuf/time.proto";
+import "github.com/oojob/protobuf/system.proto";
+import "github.com/oojob/protobuf/health.proto";
+import "github.com/oojob/protobuf/applicants.proto";
+import "github.com/oojob/protobuf/cursor.proto";
 
 package job;
 
 message Job {
   /// company identifier: Is the id of company that create this job.
-  oojob.protobuf.Identifier identity = 1;
+  github.com.oojob.protobuf.Identifier identity = 1;
 
   /// employment: Denotes the employment type for this job.
   string employment = 2; // fulltime/ parttime / remote
 
   /// salary: Used to define salary range offered for this job.
-  oojob.protobuf.Range salary = 3;
+  github.com.oojob.protobuf.Range salary = 3;
 
   /// salary: Used to define experience(years) required for this job.
-  oojob.protobuf.Range experience = 4;
+  github.com.oojob.protobuf.Range experience = 4;
 
   /// valid_from: Used to define date that the job becomes valid for applicants.
   /// valid_through: Used to define date that the job becomes invalid for
   /// applicants.
-  oojob.protobuf.Time time = 5;
+  github.com.oojob.protobuf.Time time = 5;
 
   /// skills: Used to define the skills required for this job. e.g
   /// [java,javascript,c++,..,c]
@@ -57,11 +57,11 @@ message Job {
   /// time
   string type = 10;
 
-  oojob.protobuf.Place place = 11;
+  github.com.oojob.protobuf.Place place = 11;
 
-  oojob.protobuf.Metadata metadata = 12;
+  github.com.oojob.protobuf.Metadata metadata = 12;
 
-  oojob.protobuf.Applicant applicants = 13;
+  github.com.oojob.protobuf.Applicant applicants = 13;
 }
 
 /*
@@ -73,21 +73,24 @@ message JobAllResponse {
 }
 
 service JobService {
-  rpc CreateJob(Job) returns (oojob.protobuf.Id);
+  rpc CreateJob(Job) returns (github.com.oojob.protobuf.Id);
 
-  rpc ReadJob(oojob.protobuf.Id) returns (Job);
+  rpc ReadJob(github.com.oojob.protobuf.Id) returns (Job);
 
-  rpc UpdateJob(Job) returns (oojob.protobuf.Id);
+  rpc UpdateJob(Job) returns (github.com.oojob.protobuf.Id);
 
-  rpc DeleteJob(oojob.protobuf.Id) returns (oojob.protobuf.Id);
+  rpc DeleteJob(github.com.oojob.protobuf.Id)
+      returns (github.com.oojob.protobuf.Id);
 
-  rpc ReadAllJobsByCompany(oojob.protobuf.Pagination) returns (JobAllResponse);
+  rpc ReadAllJobsByCompany(github.com.oojob.protobuf.Pagination)
+      returns (JobAllResponse);
 
-  rpc ReadAllJobs(oojob.protobuf.Pagination) returns (JobAllResponse);
+  rpc ReadAllJobs(github.com.oojob.protobuf.Pagination)
+      returns (JobAllResponse);
 
-  rpc Check(oojob.protobuf.HealthCheckRequest)
-      returns (oojob.protobuf.HealthCheckResponse);
+  rpc Check(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (github.com.oojob.protobuf.HealthCheckResponse);
 
-  rpc Watch(oojob.protobuf.HealthCheckRequest)
-      returns (stream oojob.protobuf.HealthCheckResponse);
+  rpc Watch(github.com.oojob.protobuf.HealthCheckRequest)
+      returns (stream github.com.oojob.protobuf.HealthCheckResponse);
 }
