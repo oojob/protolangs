@@ -106,7 +106,7 @@ message Profile {
   github.com.oojob.protobuf.Address address = 11;
 
   /// ProfileSecurity help's us to maintain data related to profile security
-  Secutiry ProfileSecurity = 12;
+  ProfileSecurity security = 12;
 
   /// Profile metadata :- metadata related to the user
   github.com.oojob.protobuf.Metadata metadata = 13;

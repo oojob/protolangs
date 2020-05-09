@@ -1,4 +1,14 @@
-### enhancced profile protobuf (HEAD -> master)
+### added security option in profile (HEAD -> master)
+>Sat, 9 May 2020 15:17:36 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### enhancced profile protobuf (origin/master)
 >Sat, 9 May 2020 14:58:02 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added refactor (origin/master)
+### added refactor
 >Fri, 8 May 2020 22:47:59 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

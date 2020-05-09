@@ -119,12 +119,12 @@ function buildProtoForTypes {
           cp $REPOPATH/$lang/$reponame/doc/index.html $REPOPATH/doc/$reponame/
 
           # commitAndPush $REPOPATH/$lang/$reponame
-          if [ $lang == "node" ]
-          then
-            commitAndPushNpmPackage $REPOPATH/$lang/$reponame
-          else
-            commitAndPush $REPOPATH/$lang/$reponame
-          fi
+          # if [ $lang == "node" ]
+          # then
+          #   commitAndPushNpmPackage $REPOPATH/$lang/$reponame
+          # else
+          #   commitAndPush $REPOPATH/$lang/$reponame
+          # fi
           done < $target/.protolangs
         fi
       done
