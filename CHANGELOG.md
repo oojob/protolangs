@@ -1,4 +1,14 @@
-### added refactor (HEAD -> master)
+### enhancced profile protobuf (HEAD -> master)
+>Sat, 9 May 2020 14:58:02 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added refactor (origin/master)
 >Fri, 8 May 2020 22:47:59 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added option to build node package (origin/master)
+### added option to build node package
 >Fri, 8 May 2020 09:45:24 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
