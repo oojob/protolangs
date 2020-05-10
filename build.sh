@@ -74,7 +74,7 @@ function buildProtoForTypes {
 
   # push official base repo to github and npm package
   commitAndPush build/go/protobuf
-  commitAndPush build/node/oojob-protobuf
+  commitAndPushNpmPackage build/node/oojob-protobuf
 
   # BASE_PACKAGE=$target/oojob
   for src in */; do

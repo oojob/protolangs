@@ -33,24 +33,38 @@ option go_package = "github.com.oojob.protobuf";
  * https://www.apollographql.com/blog/understanding-pagination-rest-graphql-and-relay-b10f835549e7
  */
 message Pagination {
+  /// Pagination page :- act's as page metadata
+  int64 page = 1;
+
   /// Pagination first :- first x value to take out of fetched result
-  int64 first = 1;
+  int64 first = 2;
 
   /// Pagination after :- after fetching skip the first x items
-  string after = 2;
+  string after = 3;
 
   /// Pagination offset :- standard offset in pagination
-  string offset = 3;
+  int64 offset = 4;
 
   /// Pagination limit :- standard limit in pagination
-  int64 limit = 4;
+  int64 limit = 5;
+
+  enum Sort {
+    /// ASC :- sort by ascending
+    ASC = 0;
+
+    /// DSC :-  sort by descending
+    DSC = 1;
+  }
+
+  /// Sort :- sort the result by ASC/DSC
+  Sort sort = 6;
 
   /// Pagination previous :- previous curser for data
-  string previous = 5;
+  string previous = 7;
 
   /// Pagination :- next curser for data
-  string next = 6;
+  string next = 8;
 
   /// Entity id (JOB | COMPANY | PROFILES)
-  string identifier = 7;
+  string identifier = 9;
 }

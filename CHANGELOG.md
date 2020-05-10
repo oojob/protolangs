@@ -1,4 +1,14 @@
-### modified build.sh (HEAD -> master)
+### added profile operation to profile service (HEAD -> master)
+>Sun, 10 May 2020 06:26:40 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### modified build.sh (origin/master)
 >Sun, 10 May 2020 04:30:58 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added security option in profile (origin/master)
+### added security option in profile
 >Sat, 9 May 2020 15:17:36 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

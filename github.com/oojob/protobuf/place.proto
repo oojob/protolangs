@@ -49,7 +49,7 @@ message AggregateRating {
   int64 rating_count = 2;
 
   /// AggregateRating :-
-  int64 review_rount = 3;
+  int64 review_count = 3;
 }
 
 /**
@@ -105,7 +105,7 @@ message Address {
   string region = 3;
 
   /// Address postal code :- For example, 94043.
-  string postal_code = 4;
+  int64 postal_code = 4;
 
   /// Address street :- For example, 1600 Amphitheatre Pkwy.
   string street = 5;
