@@ -1,4 +1,14 @@
-### added profile npm package (HEAD -> master)
+### added code option for protobuf (HEAD -> master)
+>Sun, 10 May 2020 11:06:04 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added profile npm package (origin/master)
 >Sun, 10 May 2020 09:11:39 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added profile operation to profile service (origin/master)
+### added profile operation to profile service
 >Sun, 10 May 2020 06:26:40 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

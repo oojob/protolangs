@@ -172,7 +172,7 @@ message ValidateEmailRequest {
  */
 service ProfileService {
   /// ProfileService CreateProfile :- help's uo to create a profile
-  rpc CreateProfile(Profile) returns (Profile);
+  rpc CreateProfile(Profile) returns (github.com.oojob.protobuf.Id);
 
   /// ProfileService ConfirmProfile :- help's us to verify the profile
   rpc ConfirmProfile(ConfirmProfileRequest)
@@ -182,7 +182,7 @@ service ProfileService {
   rpc ReadProfile(ReadProfileRequest) returns (Profile);
 
   /// ProfileService UpdateProfile :- help's us to update the profile
-  rpc UpdateProfile(Profile) returns (Profile);
+  rpc UpdateProfile(Profile) returns (github.com.oojob.protobuf.Id);
 
   /// ProfileService  ValidateUsername :- help's us to validate username
   /// availability
