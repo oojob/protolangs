@@ -1,0 +1,31 @@
+/*
+ * Created on Sun Apr 28 2020
+ *
+ * Profile related messages.
+ * This file is resposible for all operation related to profile.
+ *
+ * @author nirajgeorgian@oojob.io (Niraj Kishore)
+ *
+ * Copyright (c) 2020 - oojobs
+ */
+syntax = "proto3";
+
+package github.com.oojob.protobuf;
+
+option go_package = "github.com.oojob.protobuf";
+
+message ProfileOperations {
+  enum ProfileOperationOptions {
+    CREATE = 0;
+    READ = 1;
+    UPDATE = 2;
+    DELETE = 3;
+    BULK_UPDATE = 4;
+  }
+
+  repeated ProfileOperationOptions profile_operations = 1;
+}
+message PermissionsBase {
+  /// map
+  map<string, ProfileOperations> permissions = 1;
+}

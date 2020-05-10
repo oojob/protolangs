@@ -1,4 +1,14 @@
-### added profile operation to profile service (HEAD -> master)
+### added profile npm package (HEAD -> master)
+>Sun, 10 May 2020 09:11:39 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added profile operation to profile service (origin/master)
 >Sun, 10 May 2020 06:26:40 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### modified build.sh (origin/master)
+### modified build.sh
 >Sun, 10 May 2020 04:30:58 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

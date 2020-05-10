@@ -33,26 +33,6 @@ message Education {
   bool show = 2;
 }
 
-// message ProfileOperations {
-//   enum ProfileOperationOptions {
-//     CREATE = 0;
-//     READ = 1;
-//     UPDATE = 2;
-//     DELETE = 3;
-//     BULK_UPDATE = 4;
-//   }
-
-//   repeated ProfileOperationOptions profile_operations = 1;
-// }
-// message Permissions {
-//   enum OperationEntity {
-//     COMPANY = 0;
-//     JOB = 1;
-//     INVESTOR = 2;
-//   }
-
-//   map<string, ProfileOperations> permissions = 1;
-// }
 /**
  * ProfileSecurity help's us to maintain data related to profile security
  * aspects
