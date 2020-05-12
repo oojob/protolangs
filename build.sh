@@ -60,11 +60,13 @@ function buildProtoForTypes {
   rm -rf build/go/protobuf
   git clone git@github.com:oojob/protobuf.git build/go/protobuf
   cp -R gen/pb-go/* build/go/protobuf/
+  cp -R github.com/oojob/protobuf/* build/go/protobuf/
 
   docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l node --with-docs --lint --with-typescript
   rm -rf build/node/oojob-protobuf
   git clone git@github.com:oojob/oojob-protobuf.git build/node/oojob-protobuf
   cp -R gen/pb-node/* build/node/oojob-protobuf/
+  cp -R github.com/oojob/protobuf/* build/node/oojob-protobuf/ 
 
   mkdir -p build/doc/protobuf
   mkdir -p build/doc/oojob-protobuf
@@ -134,6 +136,7 @@ function buildProtoForTypes {
     fi
   done
 
+  # generate html docs
   nohup npx serve -d build/doc &
   sleep 5
   wget localhost:5000
