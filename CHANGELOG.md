@@ -1,4 +1,14 @@
-### added code option for protobuf (HEAD -> master)
+### added proto service file to generated build (HEAD -> master)
+>Tue, 12 May 2020 12:29:15 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added code option for protobuf (origin/master)
 >Sun, 10 May 2020 11:06:04 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added profile npm package (origin/master)
+### added profile npm package
 >Sun, 10 May 2020 09:11:39 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

@@ -114,6 +114,9 @@ function buildProtoForTypes {
           fi
 
           cp -R gen/pb-$lang/* $REPOPATH/$lang/$reponame/
+          # also copy source protofiles for reflection to work
+          cp services/$dir/service.proto $REPOPATH/$lang/$reponame/
+          
           rm -rf gen
           mkdir -p $REPOPATH/doc/$reponame
           cp $REPOPATH/$lang/$reponame/doc/index.html $REPOPATH/doc/$reponame/
