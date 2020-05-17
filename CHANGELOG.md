@@ -1,4 +1,14 @@
-### added proto service file to generated build for base package (HEAD -> master)
+### added methods for refresh and validating token (HEAD -> master)
+>Sun, 17 May 2020 20:33:20 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added proto service file to generated build for base package (origin/master)
 >Tue, 12 May 2020 13:02:32 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added proto service file to generated build (origin/master)
+### added proto service file to generated build
 >Tue, 12 May 2020 12:29:15 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

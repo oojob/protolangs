@@ -77,45 +77,48 @@ message ProfileSecurity {
  * for different domain.
  */
 message Profile {
+  /// profile :- mongodb generated ID
+  string id = 1;
+
   /// Profile identifier :- base iddentifier act's as unique identifier
-  github.com.oojob.protobuf.Identifier identity = 1;
+  github.com.oojob.protobuf.Identifier identity = 2;
 
   /// Profile given_name :- act's as first name
-  string given_name = 2;
+  string given_name = 3;
 
   /// Profile middle_name :- user's middlename and it's optional
-  string middle_name = 3;
+  string middle_name = 4;
 
   /// Profile family_name :- last name or sirname
-  string family_name = 4;
+  string family_name = 5;
 
   /// Profile username :- it should be unique and it help's us
   /// to identify uniquely
-  string username = 5;
+  string username = 6;
 
   /// Profile email :- email address of the user
-  github.com.oojob.protobuf.Email email = 6;
+  github.com.oojob.protobuf.Email email = 7;
 
   /// Profile gender :- it should be based on choice
-  string gender = 7;
+  string gender = 8;
 
   /// Profile birthdate :- user's birthdate
-  google.protobuf.Timestamp birthdate = 8;
+  google.protobuf.Timestamp birthdate = 9;
 
   /// Profile current_position :- where he works and at what position
-  string current_position = 9;
+  string current_position = 10;
 
   /// Profile education :- primary education
-  Education education = 10;
+  Education education = 11;
 
   /// Profile address :- address of the preferred user
-  github.com.oojob.protobuf.Address address = 11;
+  github.com.oojob.protobuf.Address address = 12;
 
   /// ProfileSecurity help's us to maintain data related to profile security
-  ProfileSecurity security = 12;
+  ProfileSecurity security = 13;
 
   /// Profile metadata :- metadata related to the user
-  github.com.oojob.protobuf.Metadata metadata = 13;
+  github.com.oojob.protobuf.Metadata metadata = 14;
 }
 
 /**
@@ -163,6 +166,47 @@ message ValidateEmailRequest {
 }
 
 /**
+ * AuthReq :- authentication request
+ */
+message AuthRequest {
+  string username = 1;
+  string password = 2;
+}
+
+/**
+ * AuthRes :- authentication response
+ */
+message AuthResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  bool valid = 3;
+}
+
+/**
+ * AccessDetails :- auth data response
+ */
+message AccessDetails {
+  bool authorized = 1;
+  string access_uuid = 2;
+  string username = 3;
+  string email = 4;
+  string user_id = 5;
+  string identifier = 6;
+  string account_type = 7;
+  bool verified = 8;
+  int64 exp = 9;
+}
+
+/**
+ * TokenRequest :- passing token for getting data
+ */
+message TokenRequest {
+  string token = 1;
+  string access_uuid = 2;
+  string user_id = 3;
+}
+
+/**
  * ProfileService responsible for profile microservice operation.
  * more info can be found at : https://github.com/oojob/service-profile
  * project: github.com/oojob
@@ -171,6 +215,20 @@ message ValidateEmailRequest {
  * - then we can login to view profile and then perform profile operation
  */
 service ProfileService {
+  /// ProfileService Auth for authentication
+  rpc Auth(AuthRequest) returns (AuthResponse);
+
+  /// ProfileService RefreshToken for fetching new refresh token
+  rpc RefreshToken(TokenRequest) returns (AuthResponse);
+
+  /// ProfileService VerifyToken help's us to verify the auth token and return
+  /// us back the profile data
+  rpc VerifyToken(TokenRequest) returns (AccessDetails);
+
+  /// ProfileService Logout help's us to remove all the data associated with the
+  /// user session
+  rpc Logout(TokenRequest) returns (github.com.oojob.protobuf.DefaultResponse);
+
   /// ProfileService CreateProfile :- help's uo to create a profile
   rpc CreateProfile(Profile) returns (github.com.oojob.protobuf.Id);
 
