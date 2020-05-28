@@ -1,4 +1,14 @@
-### added methods for refresh and validating token (HEAD -> master)
+### added env variable support for script (HEAD -> master)
+>Thu, 28 May 2020 17:07:29 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added methods for refresh and validating token (origin/master)
 >Sun, 17 May 2020 20:33:20 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added proto service file to generated build for base package (origin/master)
+### added proto service file to generated build for base package
 >Tue, 12 May 2020 13:02:32 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

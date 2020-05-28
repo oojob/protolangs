@@ -15,6 +15,9 @@ set -e
 
 REPOPATH=${REPOPATH-/Users/oooo/Desktop/my-job/protolangs/build}
 CURRENT_BRANCH=${CURRENT_BRANCH-"master"}
+PULL_PACKAGES=${PULL_PACKAGES-false}
+PUSH_PACKAGES=${PUSH_PACKAGES-false}
+BUILD_DOC=${BUILD_DOC-false}
 
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
@@ -53,30 +56,36 @@ function buildProtoForTypes {
   # target=${1%/}
   # echo $target
 
-  rm -rf build/doc
-  git clone git@github.com:oojob/oojob.github.io build/doc
+  if [ $BUILD_DOC == true ]
+  then
+    rm -rf build/doc
+    git clone git@github.com:oojob/oojob.github.io build/doc
 
-  docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l go --with-docs --lint --with-validator
-  rm -rf build/go/protobuf
-  git clone git@github.com:oojob/protobuf.git build/go/protobuf
-  cp -R gen/pb-go/* build/go/protobuf/
-  cp -R github.com/oojob/protobuf/* build/go/protobuf/
+    docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l go --with-docs --lint --with-validator
+    rm -rf build/go/protobuf
+    git clone git@github.com:oojob/protobuf.git build/go/protobuf
+    cp -R gen/pb-go/* build/go/protobuf/
+    cp -R github.com/oojob/protobuf/* build/go/protobuf/
 
-  docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l node --with-docs --lint --with-typescript
-  rm -rf build/node/oojob-protobuf
-  git clone git@github.com:oojob/oojob-protobuf.git build/node/oojob-protobuf
-  cp -R gen/pb-node/* build/node/oojob-protobuf/
-  cp -R github.com/oojob/protobuf/* build/node/oojob-protobuf/ 
+    docker run -v `pwd`:/defs namely/protoc-all -d github.com/oojob/protobuf -l node --with-docs --lint --with-typescript
+    rm -rf build/node/oojob-protobuf
+    git clone git@github.com:oojob/oojob-protobuf.git build/node/oojob-protobuf
+    cp -R gen/pb-node/* build/node/oojob-protobuf/
+    cp -R github.com/oojob/protobuf/* build/node/oojob-protobuf/ 
 
-  mkdir -p build/doc/protobuf
-  mkdir -p build/doc/oojob-protobuf
-  cp build/node/oojob-protobuf/doc/index.html build/doc/oojob-protobuf/
-  cp build/go/protobuf/doc/index.html build/doc/protobuf/
-  rm -rf gen
+    mkdir -p build/doc/protobuf
+    mkdir -p build/doc/oojob-protobuf
+    cp build/node/oojob-protobuf/doc/index.html build/doc/oojob-protobuf/
+    cp build/go/protobuf/doc/index.html build/doc/protobuf/
+    rm -rf gen
 
-  # push official base repo to github and npm package
-  commitAndPush build/go/protobuf
-  commitAndPushNpmPackage build/node/oojob-protobuf
+    if [ $PUSH_PACKAGES == true ]; then
+      # push official base repo to github and npm package
+      commitAndPush build/go/protobuf
+      commitAndPushNpmPackage build/node/oojob-protobuf
+    fi
+  fi
+
 
   # BASE_PACKAGE=$target/oojob
   for src in */; do
@@ -90,16 +99,20 @@ function buildProtoForTypes {
 
           reponame="protorepo-$dir-$lang"
 
-          rm -rf $REPOPATH/$lang/$reponame
-          echo "removed $reponame for updating ..."
+          if [ $PULL_PACKAGES == true ]; then
+            rm -rf $REPOPATH/$lang/$reponame
+            echo "removed $reponame for updating ..."
 
-          # Clone the repository down and set the branch to the automated one
-          echo "Cloning repo: git@github.com:oojob/$reponame.git"
-          git clone git@github.com:oojob/$reponame.git $REPOPATH/$lang/$reponame
-          setupBranch $REPOPATH/$lang/$reponame
-          # mkdir -p $REPOPATH/$lang/$reponame
+            # Clone the repository down and set the branch to the automated one
+            echo "Cloning repo: git@github.com:oojob/$reponame.git"
+            git clone git@github.com:oojob/$reponame.git $REPOPATH/$lang/$reponame
+            setupBranch $REPOPATH/$lang/$reponame
+          else
+            mkdir -p $REPOPATH/$lang/$reponame
+          fi
 
           # Use the docker container for the language we care about and compile
+          echo "generating: /$reponame"
           PROTO_FILE=services/$dir/service.proto
           PROTO_INCLUDE=github.com/
           ADDITIONAL_ARGS=$([ $lang == 'node' ] && echo "--with-typescript" || echo "--with-validator")
@@ -123,13 +136,16 @@ function buildProtoForTypes {
           mkdir -p $REPOPATH/doc/$reponame
           cp $REPOPATH/$lang/$reponame/doc/index.html $REPOPATH/doc/$reponame/
 
-          # commitAndPush $REPOPATH/$lang/$reponame
-          if [ $lang == "node" ]
+          if [ $PUSH_PACKAGES == true ]
           then
-            commitAndPushNpmPackage $REPOPATH/$lang/$reponame
-          else
-            commitAndPush $REPOPATH/$lang/$reponame
+            if [ $lang == "node" ]
+            then
+              commitAndPushNpmPackage $REPOPATH/$lang/$reponame
+            else
+              commitAndPush $REPOPATH/$lang/$reponame
+            fi
           fi
+          echo '\n'
           done < $target/.protolangs
         fi
       done
