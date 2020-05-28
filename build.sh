@@ -145,7 +145,7 @@ function buildProtoForTypes {
               commitAndPush $REPOPATH/$lang/$reponame
             fi
           fi
-          echo '\n'
+          echo
           done < $target/.protolangs
         fi
       done
