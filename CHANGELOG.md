@@ -1,4 +1,14 @@
-### added new line support (HEAD -> master)
+### added mail schema (HEAD -> master)
+>Thu, 28 May 2020 18:57:43 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added new line support (origin/master)
 >Thu, 28 May 2020 17:13:25 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added env variable support for script (origin/master)
+### added env variable support for script
 >Thu, 28 May 2020 17:07:29 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

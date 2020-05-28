@@ -15,13 +15,110 @@ import "github.com/oojob/protobuf/health.proto";
 import "github.com/oojob/protobuf/metadata.proto";
 import "github.com/oojob/protobuf/system.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 package mail;
 
 /**
- * Mail help's us to store one mail entity for future conversation refrence
+ *
+ *               * => MailTemplates
+ * user => mail  * => MailBox
+ *               * => MailNotification
+ *
  */
-message Mail {
+
+/**
+ * MailTemplate help's us to define all mail templates used by company for
+ * sending mails
+ */
+message MailTemplate {
+  /// profile :- mongodb generated ID
+  string id = 1;
+
+  /// tempate attribute data value
+  message Attributes { map<string, string> values = 1; }
+  repeated Attributes attributes = 2;
+
+  /// primary color used for mail
+  string primary_color = 3;
+
+  /// secondary color used for mail
+  string secondary_color = 4;
+
+  /// additional mail logo
+  string logo = 5;
+}
+
+/**
+ * MailNotifications help's us to store one mail sending notification option's
+ * refrence
+ */
+message MailNotifications {
+  /// MailNotifications daily_digest :- daily mails for knowledge and making an
+  /// active community
+  bool daily_digest = 1;
+
+  /// MailNotifications new_direct_message :- new direct message mail
+  bool new_direct_message = 2;
+
+  /// MailNotifications new_mention :- new mention  mail in message, comment etc
+  bool new_mention = 3;
+
+  /// MailNotifications new_message_in_threads :- new mention in public thread
+  /// like in discussion etc
+  bool new_message_in_threads = 4;
+
+  /// MailNotifications new_thread_created :-when new topics created keeping the
+  /// user
+  bool new_thread_created = 5;
+
+  /// MailNotifications weekly_digest :- weekly digest
+  bool weekly_digest = 6;
+
+  /// MailNotifications new_event_created :- event created like job posted, etc
+  bool new_event_created = 7;
+
+  /// MailNotifications new_interview :- when new interview is scheduled
+  bool new_interview = 8;
+}
+
+message Message {
+  /// mail_message :- mongodb generated ID
+  string id = 1;
+
+  /// MailReq message :- your mail body message
+  string message = 2;
+
+  /// all the attachment needed to send for ex: PDF or an image
+  github.com.oojob.protobuf.Attachment attachments = 3;
+
+  /// message creation time
+  google.protobuf.Timestamp created_at = 4;
+
+  /// message reading time
+  google.protobuf.Timestamp read_at = 5;
+}
+
+/**
+ * MessageConversation help's us to store message conversation
+ */
+message MessageConversation {
+  /// MailReq to :- to whom the mail should be sent
+  /// For Eaxmple: dododuck@gmail.com
+  string to = 1;
+
+  /// all the mail conversations
+  repeated Message messages = 2;
+
+  /// It will provide you with addtional attachment of time based which which
+  /// will help you to analyze the life process of the entity it attached to
+  github.com.oojob.protobuf.Metadata metadata = 3;
+}
+
+/**
+ * MailReq help's us to store one mail entity for future conversation refrence
+ */
+message MailConversation {
   /// MailReq from :- from whose account the mail should be send.
   /// default's to: admin@oojob.io
   /// example values: abcapplied@gmail.com
@@ -34,46 +131,19 @@ message Mail {
   /// MailReq subject :- your mail subject
   string subject = 3;
 
-  /// MailReq message :- your mail body message
-  string message = 4;
-
-  /// all the attachment needed to send for ex: PDF or an image
-  repeated github.com.oojob.protobuf.Attachment attachments = 5;
-
-  /// your variable's used for message construction based on template creation
-  google.protobuf.Struct variable = 6;
+  /// all the mail conversations
+  repeated Message messages = 4;
 
   /// MailReq template :- choose which template to attach with this mail
   /// data let's suppose we have 5 type's of mail template 1: for applying
   /// job 2: for company creation so this will take a value what type of
   /// template we have to choose to send the data
   /// default to oojob default template which is used to send default mail's
-  string template = 7;
+  string template = 5;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 8;
-}
-
-/**
- * MailBox help's us to store conversation between two email id's
- */
-message MailBox {
-  /// MailBox Identifier :- help's us to represent an base entity
-  /// and identity uniquely
-  github.com.oojob.protobuf.Identifier identifier = 1;
-
-  /// MailBox context help's us to identify on what context
-  /// did we sent out the mail
-  /// [a, b] a and b are two contacts who shared conversation between them.
-  string context = 2;
-
-  ///  the conversation that happened between two people
-  repeated string owner = 3;
-
-  /// It will provide you with additional attachment of time based which
-  /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 8;
+  github.com.oojob.protobuf.Metadata metadata = 6;
 }
 
 /**
@@ -82,17 +152,71 @@ message MailBox {
 message UserMailBox {
   /// UserMailBox Identifier :- help's us to represent an base entity
   /// and identity uniquely
-  github.com.oojob.protobuf.Identifier identifier = 1;
+  /// mail :- mongodb generated ID
+  string id = 1;
 
   /// help's us to store and keep a refrence to all the mail trans.
   /// <"dododduck", "i123disfjf">
   /// this user had a conversation with dododuck whose mail trans are stored in
   /// MailBox with id as i123disfjf
-  google.protobuf.Struct contacts = 2;
+  // google.protobuf.Struct contacts = 2;
+
+  /// tempate attribute data value
+  message Conversations { map<string, MailConversation> values = 1; }
+  repeated Conversations conversations = 2;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 8;
+  github.com.oojob.protobuf.Metadata metadata = 3;
+}
+
+/**
+ * UserMailBox help's us to store all the conversations of one user
+ */
+message UserMessageBox {
+  /// UserMailBox Identifier :- help's us to represent an base entity
+  /// and identity uniquely
+  /// mail :- mongodb generated ID
+  string id = 1;
+
+  /// help's us to store and keep a refrence to all the mail trans.
+  /// <"dododduck", "i123disfjf">
+  /// this user had a conversation with dododuck whose mail trans are stored in
+  /// MailBox with id as i123disfjf
+  // google.protobuf.Struct contacts = 2;
+
+  /// tempate attribute data value
+  message Conversations { map<string, MessageConversation> values = 1; }
+  repeated Conversations conversations = 2;
+
+  /// It will provide you with addtional attachment of time based which which
+  /// will help you to analyze the life process of the entity it attached to
+  github.com.oojob.protobuf.Metadata metadata = 3;
+}
+
+/**
+ * Mail base schema
+ */
+message Mail {
+  /// mail :- mongodb generated ID
+  string id = 1;
+
+  // notifications
+  MailNotifications notifications = 2;
+
+  // mail templates
+  repeated MailTemplate mail_templates = 3;
+
+  // messages
+  UserMessageBox messages = 4;
+
+  // mails
+  UserMailBox mails = 5;
+
+  /// It will provide you with addtional attachment of time based which
+  /// which will help you to analyze the life process of the entity it
+  /// attached to
+  github.com.oojob.protobuf.Metadata metadata = 6;
 }
 
 /**
@@ -128,13 +252,18 @@ message SendMailReq {
   string template = 7;
 }
 
-/**
- * SendMailRes help's us to track whether the mail we requested sent
- * successfully or not
- */
-message SendMailRes {
-  /// SendMailRes bool :- help's us to identify for success status
-  bool status = 1;
+message SendMessageReq {
+  /// MailReq from :- from whose account he mail should be send.
+  /// default's to: admin@oojob.io
+  /// example values: abcapplied@gmail.com
+  string from = 1;
+
+  /// MailReq to :- to whome the mail should be sent
+  /// For Eaxmple: dododuck@gmail.com
+  string to = 2;
+
+  /// message body
+  string message = 3;
 }
 
 /**
@@ -150,8 +279,29 @@ message SendMailRes {
  * any other service need to send any mail's based on it's requirement
  */
 service MailService {
+  /// read mail request
+  rpc ReadMail(github.com.oojob.protobuf.Id) returns (Mail);
+
   /// Used to send mail to any based on any mail template
-  rpc SendMail(SendMailReq) returns (SendMailRes);
+  rpc SendMail(SendMailReq) returns (github.com.oojob.protobuf.DefaultResponse);
+
+  /// send message
+  rpc SendMessage(SendMessageReq)
+      returns (github.com.oojob.protobuf.DefaultResponse);
+
+  /// Used for accessing message notification settings
+  rpc GetMailNotification(github.com.oojob.protobuf.Id)
+      returns (MailNotifications);
+
+  /// Get MailBox
+  rpc GetMailBox(github.com.oojob.protobuf.Id) returns (UserMailBox);
+
+  /// Get MessageBox
+  rpc GetMessageBox(github.com.oojob.protobuf.Id) returns (UserMessageBox);
+
+  /// Used for accessing message notification settings
+  rpc SetMailNotification(MailNotifications)
+      returns (github.com.oojob.protobuf.DefaultResponse);
 
   /// Used to check health status of the running microservice
   rpc Check(github.com.oojob.protobuf.HealthCheckRequest)

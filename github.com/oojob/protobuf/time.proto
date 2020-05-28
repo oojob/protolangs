@@ -34,7 +34,6 @@ enum DaysOfWeek {
  */
 message Time {
   /// TimeSpecification opens :- The opening hour of the place or service on
-
   /// given day(s) of the week.
   google.protobuf.Timestamp opens = 1;
 
