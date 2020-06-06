@@ -47,6 +47,10 @@ message MailTemplate {
 
   /// additional mail logo
   string logo = 5;
+
+  /// It will provide you with addtional attachment of time based which which
+  /// will help you to analyze the life process of the entity it attached to
+  github.com.oojob.protobuf.Metadata metadata = 6;
 }
 
 /**
@@ -103,47 +107,53 @@ message Message {
  * MessageConversation help's us to store message conversation
  */
 message MessageConversation {
+  /// unique identification
+  string id = 1;
+
   /// MailReq to :- to whom the mail should be sent
   /// For Eaxmple: dododuck@gmail.com
-  string to = 1;
+  string to = 2;
 
   /// all the mail conversations
-  repeated Message messages = 2;
+  repeated Message messages = 3;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 3;
+  github.com.oojob.protobuf.Metadata metadata = 4;
 }
 
 /**
  * MailReq help's us to store one mail entity for future conversation refrence
  */
 message MailConversation {
+  /// unique identification
+  string id = 1;
+
   /// MailReq from :- from whose account the mail should be send.
   /// default's to: admin@oojob.io
   /// example values: abcapplied@gmail.com
-  string from = 1;
+  string from = 2;
 
   /// MailReq to :- to whom the mail should be sent
   /// For Eaxmple: dododuck@gmail.com
-  string to = 2;
+  string to = 3;
 
   /// MailReq subject :- your mail subject
-  string subject = 3;
+  string subject = 4;
 
   /// all the mail conversations
-  repeated Message messages = 4;
+  repeated Message messages = 5;
 
   /// MailReq template :- choose which template to attach with this mail
   /// data let's suppose we have 5 type's of mail template 1: for applying
   /// job 2: for company creation so this will take a value what type of
   /// template we have to choose to send the data
   /// default to oojob default template which is used to send default mail's
-  string template = 5;
+  string template = 6;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 6;
+  github.com.oojob.protobuf.Metadata metadata = 7;
 }
 
 /**
@@ -201,22 +211,24 @@ message Mail {
   /// mail :- mongodb generated ID
   string id = 1;
 
+  string user_id = 2;
+
   // notifications
-  MailNotifications notifications = 2;
+  MailNotifications notifications = 3;
 
   // mail templates
-  repeated MailTemplate mail_templates = 3;
+  repeated MailTemplate mail_templates = 4;
 
   // messages
-  UserMessageBox messages = 4;
+  UserMessageBox messages = 5;
 
   // mails
-  UserMailBox mails = 5;
+  UserMailBox mails = 6;
 
   /// It will provide you with addtional attachment of time based which
   /// which will help you to analyze the life process of the entity it
   /// attached to
-  github.com.oojob.protobuf.Metadata metadata = 6;
+  github.com.oojob.protobuf.Metadata metadata = 7;
 }
 
 /**
