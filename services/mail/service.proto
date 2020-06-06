@@ -235,47 +235,54 @@ message Mail {
  * MailReq it help's us to define request object for mail sending task
  */
 message SendMailReq {
+  /// user identification
+  string user_id = 1;
+
   /// MailReq from :- from whose account he mail should be send.
   /// default's to: admin@oojob.io
   /// example values: abcapplied@gmail.com
-  string from = 1;
+  string from = 2;
 
   /// MailReq to :- to whome the mail should be sent
   /// For Eaxmple: dododuck@gmail.com
-  string to = 2;
+  string to = 3;
 
   /// MailReq subject :- your mail subject
-  string subject = 3;
+  string subject = 4;
 
   /// MailReq message :- your mail body message
-  string message = 4;
+  string message = 5;
 
   /// all the attachment needed to send for ex: PDF or an image
-  repeated github.com.oojob.protobuf.Attachment attachments = 5;
+  repeated github.com.oojob.protobuf.Attachment attachments = 6;
 
   /// your variable's used for message construction based on template creation
-  google.protobuf.Struct variable = 6;
+  message Variables { map<string, string> values = 1; }
+  repeated Variables variables = 7;
 
   /// MailReq template :- choose which template to attach with this mail
   /// data let's suppose we have 5 type's of mail template 1: for applying
   /// job 2: for company creation so this will take a value what type of
   /// template we have to choose to send the data
   /// default to oojob default template which is used to send default mail
-  string template = 7;
+  string template = 8;
 }
 
 message SendMessageReq {
+  /// user identification
+  string user_id = 1;
+
   /// MailReq from :- from whose account he mail should be send.
   /// default's to: admin@oojob.io
   /// example values: abcapplied@gmail.com
-  string from = 1;
+  string from = 2;
 
   /// MailReq to :- to whome the mail should be sent
   /// For Eaxmple: dododuck@gmail.com
-  string to = 2;
+  string to = 3;
 
   /// message body
-  string message = 3;
+  string message = 4;
 }
 
 /**

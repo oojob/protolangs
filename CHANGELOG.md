@@ -1,4 +1,14 @@
-### added schema options for mail (HEAD -> master)
+### added option for passing user data (HEAD -> master)
+>Sat, 6 Jun 2020 14:18:28 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added schema options for mail (origin/master)
 >Sat, 6 Jun 2020 12:47:38 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added mail schema (origin/master)
+### added mail schema
 >Thu, 28 May 2020 18:57:43 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
