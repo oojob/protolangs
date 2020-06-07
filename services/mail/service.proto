@@ -20,14 +20,6 @@ import "google/protobuf/timestamp.proto";
 package mail;
 
 /**
- *
- *               * => MailTemplates
- * user => mail  * => MailBox
- *               * => MailNotification
- *
- */
-
-/**
  * MailTemplate help's us to define all mail templates used by company for
  * sending mails
  */
@@ -104,29 +96,12 @@ message Message {
 }
 
 /**
- * MessageConversation help's us to store message conversation
+ * UserMailBox help's us to store all the conversations of one user
  */
-message MessageConversation {
-  /// unique identification
-  string id = 1;
-
-  /// MailReq to :- to whom the mail should be sent
-  /// For Eaxmple: dododuck@gmail.com
-  string to = 2;
-
-  /// all the mail conversations
-  repeated Message messages = 3;
-
-  /// It will provide you with addtional attachment of time based which which
-  /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 4;
-}
-
-/**
- * MailReq help's us to store one mail entity for future conversation refrence
- */
-message MailConversation {
-  /// unique identification
+message UserMailBox {
+  /// UserMailBox Identifier :- help's us to represent an base entity
+  /// and identity uniquely
+  /// mail :- mongodb generated ID
   string id = 1;
 
   /// MailReq from :- from whose account the mail should be send.
@@ -159,49 +134,22 @@ message MailConversation {
 /**
  * UserMailBox help's us to store all the conversations of one user
  */
-message UserMailBox {
-  /// UserMailBox Identifier :- help's us to represent an base entity
-  /// and identity uniquely
-  /// mail :- mongodb generated ID
-  string id = 1;
-
-  /// help's us to store and keep a refrence to all the mail trans.
-  /// <"dododduck", "i123disfjf">
-  /// this user had a conversation with dododuck whose mail trans are stored in
-  /// MailBox with id as i123disfjf
-  // google.protobuf.Struct contacts = 2;
-
-  /// tempate attribute data value
-  message Conversations { map<string, MailConversation> values = 1; }
-  repeated Conversations conversations = 2;
-
-  /// It will provide you with addtional attachment of time based which which
-  /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 3;
-}
-
-/**
- * UserMailBox help's us to store all the conversations of one user
- */
 message UserMessageBox {
   /// UserMailBox Identifier :- help's us to represent an base entity
   /// and identity uniquely
   /// mail :- mongodb generated ID
   string id = 1;
 
-  /// help's us to store and keep a refrence to all the mail trans.
-  /// <"dododduck", "i123disfjf">
-  /// this user had a conversation with dododuck whose mail trans are stored in
-  /// MailBox with id as i123disfjf
-  // google.protobuf.Struct contacts = 2;
+  /// MailReq to :- to whom the mail should be sent
+  /// For Eaxmple: dododuck@gmail.com
+  string to = 2;
 
-  /// tempate attribute data value
-  message Conversations { map<string, MessageConversation> values = 1; }
-  repeated Conversations conversations = 2;
+  /// all the mail conversations
+  repeated Message messages = 3;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 3;
+  github.com.oojob.protobuf.Metadata metadata = 4;
 }
 
 /**
@@ -211,19 +159,20 @@ message Mail {
   /// mail :- mongodb generated ID
   string id = 1;
 
+  /// user id
   string user_id = 2;
 
-  // notifications
+  /// notifications
   MailNotifications notifications = 3;
 
-  // mail templates
+  /// mail templates
   repeated MailTemplate mail_templates = 4;
 
-  // messages
-  UserMessageBox messages = 5;
+  /// messages
+  repeated UserMessageBox messages = 5;
 
-  // mails
-  UserMailBox mails = 6;
+  /// mails
+  repeated UserMailBox mails = 6;
 
   /// It will provide you with addtional attachment of time based which
   /// which will help you to analyze the life process of the entity it

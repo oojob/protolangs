@@ -19,6 +19,12 @@ PULL_PACKAGES=${PULL_PACKAGES-false}
 PUSH_PACKAGES=${PUSH_PACKAGES-false}
 BUILD_DOC=${BUILD_DOC-false}
 
+# load environment Local .env
+if [ -f .env ]; then
+  # Load Environment Variables
+  export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
+fi
+
 # Helper for adding a directory to the stack and echoing the result
 function enterDir {
   echo "Entering $1"
@@ -203,13 +209,23 @@ function commitAndPushNpmPackage {
   git add -N .
 
   if ! git diff --exit-code > /dev/null; then
+    echo "checking for npm dependency updates with file diff"
+    npx npm-check-updates -u
     git add .
     git commit -m "Auto Creation of Proto"
     npm install
     npm run release
     git push --follow-tags origin master && npm publish
   else
-    echo "No changes detected for $1"
+    echo "checking for npm dependency updates without file diff"
+    npx npm-check-updates -u
+    npm install
+
+    if ! git diff --exit-code > /dev/null; then
+      git add .
+      git commit -m "Update package dependency"
+      git push --follow-tags origin master
+    fi
   fi
 
   leaveDir

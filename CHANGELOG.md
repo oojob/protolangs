@@ -1,4 +1,14 @@
-### added option for passing user data (HEAD -> master)
+### added build option for node packages (HEAD -> master)
+>Sun, 7 Jun 2020 11:54:20 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added option for passing user data (origin/master)
 >Sat, 6 Jun 2020 14:18:28 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added schema options for mail (origin/master)
+### added schema options for mail
 >Sat, 6 Jun 2020 12:47:38 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
