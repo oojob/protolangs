@@ -217,6 +217,11 @@ message SendMailReq {
   string template = 8;
 }
 
+message SendBulkMailReq {
+  /// mail request
+  repeated SendMailReq mail_requests = 1;
+}
+
 message SendMessageReq {
   /// user identification
   string user_id = 1;
@@ -247,6 +252,13 @@ message SendMessageReq {
  * any other service need to send any mail's based on it's requirement
  */
 service MailService {
+  /// system generated mail
+  rpc SendSystemMail(SendMailReq)
+      returns (github.com.oojob.protobuf.DefaultResponse);
+
+  rpc SendBulkSystemMail(SendBulkMailReq)
+      returns (github.com.oojob.protobuf.DefaultResponse);
+
   /// read mail request
   rpc ReadMail(github.com.oojob.protobuf.Id) returns (Mail);
 

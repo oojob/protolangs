@@ -210,7 +210,6 @@ function commitAndPushNpmPackage {
 
   if ! git diff --exit-code > /dev/null; then
     echo "checking for npm dependency updates with file diff"
-    npx npm-check-updates -u
     git add .
     git commit -m "Auto Creation of Proto"
     npm install

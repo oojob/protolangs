@@ -1,4 +1,14 @@
-### added build option for node packages (HEAD -> master)
+### added mail service definition (HEAD -> master)
+>Tue, 9 Jun 2020 20:50:19 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added build option for node packages (origin/master)
 >Sun, 7 Jun 2020 11:54:20 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added option for passing user data (origin/master)
+### added option for passing user data
 >Sat, 6 Jun 2020 14:18:28 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
