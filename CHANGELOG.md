@@ -1,4 +1,14 @@
-### added mail service definition (HEAD -> master)
+### added code for mail (HEAD -> master)
+>Thu, 11 Jun 2020 12:00:03 +0530
+
+>Author: nirajgeorgian (niraj.kishore@stayology.com)
+
+>Commiter: nirajgeorgian (niraj.kishore@stayology.com)
+
+
+
+
+### added mail service definition (origin/master)
 >Tue, 9 Jun 2020 20:50:19 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)
@@ -8,7 +18,7 @@
 
 
 
-### added build option for node packages (origin/master)
+### added build option for node packages
 >Sun, 7 Jun 2020 11:54:20 +0530
 
 >Author: nirajgeorgian (niraj.kishore@stayology.com)

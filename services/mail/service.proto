@@ -27,22 +27,25 @@ message MailTemplate {
   /// profile :- mongodb generated ID
   string id = 1;
 
+  /// name :- name for this template
+  string name = 2;
+
   /// tempate attribute data value
   message Attributes { map<string, string> values = 1; }
-  repeated Attributes attributes = 2;
+  repeated Attributes attributes = 3;
 
   /// primary color used for mail
-  string primary_color = 3;
+  string primary_color = 4;
 
   /// secondary color used for mail
-  string secondary_color = 4;
+  string secondary_color = 5;
 
   /// additional mail logo
-  string logo = 5;
+  string logo = 6;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 6;
+  github.com.oojob.protobuf.Metadata metadata = 7;
 }
 
 /**
@@ -82,17 +85,26 @@ message Message {
   /// mail_message :- mongodb generated ID
   string id = 1;
 
+  /// MailReq from :- from whose account the mail should be send.
+  /// default's to: admin@oojob.io
+  /// example values: abcapplied@gmail.com
+  string from = 2;
+
+  /// MailReq to :- to whom the mail should be sent
+  /// For Eaxmple: dododuck@gmail.com
+  string to = 3;
+
   /// MailReq message :- your mail body message
-  string message = 2;
+  string message = 4;
 
   /// all the attachment needed to send for ex: PDF or an image
-  github.com.oojob.protobuf.Attachment attachments = 3;
+  github.com.oojob.protobuf.Attachment attachments = 5;
 
   /// message creation time
-  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp created_at = 6;
 
   /// message reading time
-  google.protobuf.Timestamp read_at = 5;
+  google.protobuf.Timestamp read_at = 7;
 }
 
 /**
@@ -104,31 +116,25 @@ message UserMailBox {
   /// mail :- mongodb generated ID
   string id = 1;
 
-  /// MailReq from :- from whose account the mail should be send.
-  /// default's to: admin@oojob.io
-  /// example values: abcapplied@gmail.com
-  string from = 2;
-
-  /// MailReq to :- to whom the mail should be sent
-  /// For Eaxmple: dododuck@gmail.com
-  string to = 3;
+  /// user identification
+  string user_id = 2;
 
   /// MailReq subject :- your mail subject
-  string subject = 4;
+  string subject = 3;
 
   /// all the mail conversations
-  repeated Message messages = 5;
+  repeated Message messages = 4;
 
   /// MailReq template :- choose which template to attach with this mail
   /// data let's suppose we have 5 type's of mail template 1: for applying
   /// job 2: for company creation so this will take a value what type of
   /// template we have to choose to send the data
   /// default to oojob default template which is used to send default mail's
-  string template = 6;
+  string template = 5;
 
   /// It will provide you with addtional attachment of time based which which
   /// will help you to analyze the life process of the entity it attached to
-  github.com.oojob.protobuf.Metadata metadata = 7;
+  github.com.oojob.protobuf.Metadata metadata = 6;
 }
 
 /**
@@ -140,9 +146,8 @@ message UserMessageBox {
   /// mail :- mongodb generated ID
   string id = 1;
 
-  /// MailReq to :- to whom the mail should be sent
-  /// For Eaxmple: dododuck@gmail.com
-  string to = 2;
+  /// user identification
+  string user_id = 2;
 
   /// all the mail conversations
   repeated Message messages = 3;
